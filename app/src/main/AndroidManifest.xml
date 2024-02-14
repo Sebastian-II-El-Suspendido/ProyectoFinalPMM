@@ -13,6 +13,33 @@
         android:theme="@style/Theme.ProyectoFinalPMM"
         tools:targetApi="31">
         <activity
+            android:name=".GestionObjetos"
+            android:exported="false" />
+        <activity
+            android:name=".ObjetoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TobeContinuedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PersonajeCreadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreacionPersonajeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MercaderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EnemigoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CiudadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RandomActivity"
+            android:exported="false" />
+        <activity
             android:name=".BaseActivity"
             android:exported="false" />
         <activity

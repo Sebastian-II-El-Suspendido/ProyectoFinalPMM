@@ -47,16 +47,16 @@
         <Button
             android:id="@+id/button"
             android:layout_width="180dp"
-            android:layout_height="30dp"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_height="5dp"
             android:layout_weight="1"
-            android:text="¿Has olvidado la contraseña?"
+            android:textColor="@color/white"
+            android:text="@string/Entrar"
+            app:cornerRadius="15dp"
+            app:iconTint="@color/white"
+            app:strokeColor="@color/white"
+            android:backgroundTint="@color/themeButton"
             android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="180dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:text="Login" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
