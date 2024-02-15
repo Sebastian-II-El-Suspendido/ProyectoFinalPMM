@@ -1,5 +1,6 @@
 package com.example.proyectofinalpmm
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -86,8 +87,17 @@ class MainActivity : BaseActivity() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             Log.i("aplicacion", "logeado correctamente")
+                            Toast.makeText(this, "logueado correctamente", Toast.LENGTH_SHORT)
+                                .show()
+                            startActivity(
+                                Intent(
+                                    this@MainActivity,
+                                    CreacionPersonajeActivity::class.java
+                                )
+                            )
                         } else {
                             Log.i("aplicacion", "logeado incorrectamente: ${it.exception}")
+                            Toast.makeText(this, "error al loguearse", Toast.LENGTH_SHORT).show()
                         }
                     }
             else {
@@ -133,9 +143,31 @@ class MainActivity : BaseActivity() {
                         if (it.isSuccessful) {
                             Log.i("aplicacion", "registrado correctamente")
                         } else {
-                            Log.i("aplicacion", "registrado incorrectamente: ${it.exception}")
+                            Log.i("aplicacion", "error al registrar")
+                            Toast.makeText(this, "Error al crear el usuario", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
+            else {
+                if (isValidEmail(email)) Toast.makeText(this, "Email no valido", Toast.LENGTH_SHORT)
+                    .show()
+                else
+                    if (isValidPassword(password)) Toast.makeText(
+                        this,
+                        "contraseña no valida",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else if (isSamePassword(password, confirmPassword)) Toast.makeText(
+                        this,
+                        "No pones la misma contraseña",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else Toast.makeText(this, "Error al iniciar sesion", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        toLogInButton.setOnClickListener {
+            login()
         }
 
     }
