@@ -7,9 +7,4 @@
 
     <style name="Theme.ProyectoFinalPMM" parent="Base.Theme.ProyectoFinalPMM" />
 
-    <style name="hintpersonal" parent="Widget.Design.TextInputLayout">
-        <item name="android:textColorHint">@color/white</item>
-
-    </style>
-
 </resources>

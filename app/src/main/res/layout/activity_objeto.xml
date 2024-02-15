@@ -6,4 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".ObjetoActivity">
 
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Nivel Objeto"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgCiudad"
+            android:layout_width="match_parent"
+            android:layout_height="363dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="309dp"
+          />
+
+        <Button
+            android:id="@+id/btnRecoger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="280dp"
+            android:layout_marginBottom="227dp"
+            android:text="Recoger" />
+
+        <Button
+            android:id="@+id/btnContinuarObj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="275dp"
+            android:layout_marginLeft="144dp"
+            android:layout_marginBottom="227dp"
+            android:layout_toRightOf="@id/btnRecoger"
+            android:text="Continuar" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

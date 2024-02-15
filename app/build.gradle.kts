@@ -35,6 +35,7 @@ android {
     }
     buildFeatures{
         viewBinding=true
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -54,4 +55,7 @@ dependencies {
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     implementation("com.google.firebase:firebase-auth-ktx")
+
+    //Lottie
+    implementation ("com.airbnb.android:lottie:3.4.0")
 }

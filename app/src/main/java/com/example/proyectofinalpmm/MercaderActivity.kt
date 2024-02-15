@@ -3,7 +3,8 @@ package com.example.proyectofinalpmm
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ejercicio3pmm.databinding.ActivityMercaderBinding
+import com.example.proyectofinalpmm.databinding.ActivityMercaderBinding
+
 
 class MercaderActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class MercaderActivity : AppCompatActivity() {
         adelanteBtn.visibility=View.INVISIBLE
 
         val dbHelper = ObjetosAleatorios(this)
-        listaArticulos = dbHelper.getArticulos()
+       // listaArticulos = dbHelper.getArticulos()
         dbHelper.close()
 
         val mochila = intent.getSerializableExtra("mochila") as Mochila

@@ -22,6 +22,15 @@ class ObjetosAleatorios(private val context: Context) :
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
+
+    }
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        
+    }
+    /*
+
+    override fun onCreate(db: SQLiteDatabase?) {
         val createTable =
             "CREATE TABLE IF NOT EXISTS $TABLA_ARTICULOS ($KEY_ID INTEGER PRIMARY KEY, $COLUMN_NOMBRE TEXT, $COLUMN_TIPO TEXT, $COLUMN_PESO INTEGER, $COLUMN_PRECIO INTEGER, $COLUMN_URI_IMAGEN INTEGER, $COLUMN_UNIDADES INTEGER)"
         db?.execSQL(createTable)
@@ -29,8 +38,11 @@ class ObjetosAleatorios(private val context: Context) :
         insertarArticulosDefault(db)
     }
 
+
+
     private fun insertarArticulosDefault(db: SQLiteDatabase?) {
         val listaArticulos = arrayListOf(
+
             Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, R.drawable.amuleto, 10),
             Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 8, 12, R.drawable.baston, 10),
             Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 3, 18, R.drawable.daga, 10),
@@ -121,4 +133,8 @@ class ObjetosAleatorios(private val context: Context) :
         db.close()
         return articulos
     }
+
+     */
+
 }
+
