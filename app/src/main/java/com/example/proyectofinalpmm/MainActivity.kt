@@ -3,75 +3,146 @@ package com.example.proyectofinalpmm
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import androidx.lifecycle.ViewModel
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import com.example.proyectofinalpmm.databinding.ActivityMainBinding
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val auth: FirebaseAuth = Firebase.auth
-    private val isLogin = true
+    // Inicio
+    private lateinit var jugar: Button
+
+    // Login
+    private lateinit var conjunto: LinearLayout
+    private lateinit var emailField: EditText
+    private lateinit var passwordField: EditText
+    private lateinit var logInButton: Button
+    private lateinit var toSignUpButton: TextView
+
+    // Registro
+    private lateinit var conjunto2: LinearLayout
+    private lateinit var emailFieldReg: EditText
+    private lateinit var passwordFieldReg: EditText
+    private lateinit var comfirmPasswordFieldReg: EditText
+    private lateinit var signUpButton: Button
+    private lateinit var toLogInButton: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-    }
-}
+        setContentView(binding.root)
 
-fun continuar(isLogin : Boolean){
-    if (isLogin){
-        login()
-    }else {
-        registro()
-    }
-}
+        // Inicio
+        jugar = binding.button
 
-fun login() {
+        // Login
+        conjunto = binding.conjunto
+        emailField = binding.editTextEmail
+        passwordField = binding.editTextPassword
+        logInButton = binding.buttonLogIn
+        toSignUpButton = binding.btnToSignUp
 
-    val email = ""
-    val password = ""
+        // Registro
+        conjunto2 = binding.conjunto2
+        emailFieldReg = binding.editTextEmailReg
+        passwordFieldReg = binding.editTextPasswordReg
+        comfirmPasswordFieldReg = binding.editTextConfirmPasswordReg
+        signUpButton = binding.buttonSignUp
+        toLogInButton = binding.btnToLogIn
 
-    if (isValidEmail(email) && isValidPassword(password))
-        FirebaseAuth
-            .getInstance()
-            .signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Log.i("aplicacion", "logeado correctamente")
-                } else {
-                    Log.i("aplicacion", "logeado incorrectamente: ${it.exception}")
-                }
+        conjunto.visibility = View.GONE
+        conjunto2.visibility = View.GONE
+        jugar.visibility = View.VISIBLE
+
+
+        jugar.setOnClickListener {
+            if (FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty())
+                login()
+            else {
+                Log.i("hola", "todo correcto")
             }
-}
+        }
+    }
 
-fun registro() {
-    val email = ""
-    val password = ""
-    val confirmPassword = ""
+    private fun login() {
+        conjunto.visibility = View.VISIBLE
+        jugar.visibility = View.GONE
 
-    if (
-        isValidEmail(email) &&
-        isValidPassword(password) &&
-        isSamePassword(
-            password,
-            confirmPassword
-        )
-    )
-        FirebaseAuth
-            .getInstance()
-            .createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Log.i("aplicacion", "registrado correctamente")
-                } else {
-                    Log.i("aplicacion", "registrado incorrectamente: ${it.exception}")
-                }
+        logInButton.setOnClickListener {
+            val email = emailField.text.toString()
+            val password = passwordField.text.toString()
+
+            if (isValidEmail(email) && isValidPassword(password))
+                FirebaseAuth
+                    .getInstance()
+                    .signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Log.i("aplicacion", "logeado correctamente")
+                        } else {
+                            Log.i("aplicacion", "logeado incorrectamente: ${it.exception}")
+                        }
+                    }
+            else {
+                if (isValidEmail(email)) Toast.makeText(this, "Email no valido", Toast.LENGTH_SHORT)
+                    .show()
+                else
+                    if (isValidPassword(password)) Toast.makeText(
+                        this,
+                        "contraseña no valida",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else Toast.makeText(this, "Error al iniciar sesion", Toast.LENGTH_SHORT).show()
             }
-}
+        }
 
-fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-fun isValidPassword(pass: String): Boolean = pass.length in 6..50
-fun isSamePassword(pass: String, pass2: String): Boolean = pass == pass2
+        toSignUpButton.setOnClickListener {
+            registro()
+        }
+
+    }
+
+    private fun registro() {
+        conjunto.visibility = View.GONE
+        conjunto2.visibility = View.VISIBLE
+
+        signUpButton.setOnClickListener {
+            val email = emailFieldReg.text.toString()
+            val password = passwordFieldReg.text.toString()
+            val confirmPassword = comfirmPasswordFieldReg.text.toString()
+
+            if (
+                isValidEmail(email) &&
+                isValidPassword(password) &&
+                isSamePassword(
+                    password,
+                    confirmPassword
+                )
+            )
+                FirebaseAuth
+                    .getInstance()
+                    .createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Log.i("aplicacion", "registrado correctamente")
+                        } else {
+                            Log.i("aplicacion", "registrado incorrectamente: ${it.exception}")
+                        }
+                    }
+        }
+
+    }
+
+    private fun isValidEmail(email: String): Boolean =
+        Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+    private fun isValidPassword(pass: String): Boolean = pass.length in 6..50
+    private fun isSamePassword(pass: String, pass2: String): Boolean = pass == pass2
+}
