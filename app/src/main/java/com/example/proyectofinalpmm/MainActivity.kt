@@ -142,6 +142,13 @@ class MainActivity : BaseActivity() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             Log.i("aplicacion", "registrado correctamente")
+                            Toast.makeText(this, "Registrado correctamente", Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                Intent(
+                                    this@MainActivity,
+                                    CreacionPersonajeActivity::class.java
+                                )
+                            )
                         } else {
                             Log.i("aplicacion", "error al registrar")
                             Toast.makeText(this, "Error al crear el usuario", Toast.LENGTH_SHORT)
