@@ -5,136 +5,126 @@
     android:id="@+id/mainXML"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#484A41"
-    tools:context=".MainActivity">
+    android:background="@drawable/escenariocreacion"
+    tools:context=".CreacionPersonajeActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/alert_dark_frame"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="" />
 
     <ImageView
         android:id="@+id/imagen"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/botonCrearPersonaje"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text=""
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagen" />
-
-    <EditText
-        android:id="@+id/nombreEditText"
-        style=""
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="40dp"
-        android:ems="10"
-        android:hint=""
-        android:inputType="text"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text=""
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreEditText" />
 
-    <Spinner
-        android:id="@+id/spinnerRaza"
-        style="@android:style/Widget.Spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="40dp"
-
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text=""
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Spinner
-        android:id="@+id/spinnerClase"
-        style="@android:style/Widget.Spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="40dp"
-
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text=""
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <Spinner
-        android:id="@+id/spinnerEstadoVital"
-        style="@android:style/Widget.Spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="40dp"
-
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
-
     <Button
         android:id="@+id/botonCrearPersonaje"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#6B8096"
+        android:gravity="center"
         android:stateListAnimator="@android:anim/accelerate_interpolator"
-        android:text="Guardar"
+        android:text="@string/CrearPersonaje"
+        android:textColor="#404040"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/nombreEditText"
+        android:layout_width="@dimen/activityMainCompWidth"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/bordemarcos"
+        android:gravity="center"
+        android:hint="@string/HintTextNombre"
+        android:inputType="text"
+        android:textColor="#404040"
+        android:textColorHint="#404040"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bordemarcos"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:outlineAmbientShadowColor="#3D4D5C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="@dimen/activityMainCompWidth"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/TextViewRaza"
+            android:textColor="#404040"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerRaza"
+            style="@android:style/Widget.Spinner"
+            android:layout_width="@dimen/SpinnerTamWidth"
+            android:layout_height="@dimen/SpinnerTamHeigh"
+            android:layout_marginTop="5dp"
+            android:entries="@array/spinnerRaza" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="@dimen/activityMainCompWidth"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/TextViewClase"
+            android:textColor="#404040"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerClase"
+            style="@android:style/Widget.Spinner"
+            android:layout_width="@dimen/SpinnerTamWidth"
+            android:layout_height="@dimen/SpinnerTamHeigh"
+            android:layout_marginTop="5dp"
+            android:entries="@array/spinnerClase" />
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="@dimen/activityMainCompWidth"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+
+            android:text="@string/TextViewEstadoVital"
+            android:textColor="#404040"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerEstadoVital"
+            style="@android:style/Widget.Spinner"
+            android:layout_width="@dimen/SpinnerTamWidth"
+            android:layout_height="@dimen/SpinnerTamHeigh"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+
+            android:entries="@array/spinnerEstadoVital" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
