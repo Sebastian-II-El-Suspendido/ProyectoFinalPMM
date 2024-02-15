@@ -2,6 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="themeborder"></color>
-    <color name="themeButton">#3ea828</color>
+    <color name="themeborder">#D5B69F</color>
+    <color name="themeButton">#2F7936</color>
 </resources>

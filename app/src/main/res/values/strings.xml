@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">ProyectoFinalPMM</string>
+    <string name="jugar">Jugar</string>
+    <string name="pass">Contraseña</string>
+    <string name="pass2">Confirmar contraseña</string>
+    <string name="username">Usuario</string>
+    <string name="entrar">Entrar</string>
+    <string name="registrar">¿Aún no tienes cuenta? Regístrate ya.</string>
     <string name="Entrar">LogIn</string>
 </resources>

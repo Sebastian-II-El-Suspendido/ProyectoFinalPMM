@@ -7,56 +7,165 @@
     android:background="@drawable/fondo"
     tools:context=".MainActivity">
 
+
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/user"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="text"
-            android:text="Name"
-            android:textColor="@color/white" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/borde"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorHint="@color/white"
+            android:gravity="center"
+            app:boxBackgroundMode="none"
+            app:hintTextColor="@color/black">
 
-        <EditText
-            android:id="@+id/pass"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="text|textPassword"
-            android:shadowColor="@color/white"
-            android:text="Password"
-            android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/username"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="12dp"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="h"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/borde"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorHint="@color/white"
+            app:boxBackgroundMode="none"
+            app:hintTextColor="@color/black"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/pass"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/borde"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColorHint="@color/white"
+            android:visibility="visible"
+            app:boxBackgroundMode="none"
+            app:hintTextColor="@color/white"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/editTextConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/pass2"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:paddingBottom="10dp"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="180dp"
+            android:id="@+id/buttonJugar"
             style="?attr/materialButtonOutlinedStyle"
-            android:layout_height="5dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:textColor="@color/white"
-            android:text="@string/Entrar"
-            app:cornerRadius="15dp"
-            app:iconTint="@color/white"
-            app:strokeColor="@color/white"
             android:backgroundTint="@color/themeButton"
-            android:textSize="12sp" />
+            android:text="@string/jugar"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:cornerRadius="15dp"
+            android:textColorHint="@color/white"
+            android:textColorHighlight="@color/white"
+            app:iconTint="@color/white"
+            app:strokeColor="@color/white" />
+
+        <TextView
+            android:id="@+id/btnSignIn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/borde"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:elevation="2dp"
+            android:text="@string/registrar"
+            android:textColorHint="@color/white"
+            android:textColorHighlight="@color/white"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        style=""
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/themeButton"
+        android:text="@string/entrar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:cornerRadius="15dp"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
