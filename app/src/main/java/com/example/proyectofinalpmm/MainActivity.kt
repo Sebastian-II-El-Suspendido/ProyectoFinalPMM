@@ -1,7 +1,11 @@
 package com.example.proyectofinalpmm
 
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -11,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.proyectofinalpmm.databinding.ActivityMainBinding
+import com.example.proyectofinalpmm.musica.Musica
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : BaseActivity() {
@@ -61,6 +66,22 @@ class MainActivity : BaseActivity() {
         conjunto.visibility = View.GONE
         conjunto2.visibility = View.GONE
         jugar.visibility = View.VISIBLE
+
+        // Musica
+        val musica = Intent(this@MainActivity, Musica::class.java)
+        val serviceConnection = object : ServiceConnection {
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                val binder = service as Musica.MusicBinder
+                val musicService = binder.getService()
+
+                musicService.startMusic()
+            }
+
+            override fun onServiceDisconnected(name: ComponentName?) {
+            }
+        }
+
+        bindService(musica, serviceConnection, Context.BIND_AUTO_CREATE)
 
 
         jugar.setOnClickListener {
