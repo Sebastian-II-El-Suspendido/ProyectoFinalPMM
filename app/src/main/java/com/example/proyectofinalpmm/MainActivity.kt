@@ -61,7 +61,6 @@ class MainActivity : BaseActivity() {
         passwordFieldReg = binding.editTextPasswordReg
         comfirmPasswordFieldReg = binding.editTextConfirmPasswordReg
         signUpButton = binding.buttonSignUp
-        toLogInButton = binding.btnToLogIn
 
         conjunto.visibility = View.GONE
         conjunto2.visibility = View.GONE
@@ -81,7 +80,7 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        bindService(musica, serviceConnection, Context.BIND_AUTO_CREATE)
+        bindService(musica, serviceConnection, BIND_AUTO_CREATE)
 
 
         jugar.setOnClickListener {

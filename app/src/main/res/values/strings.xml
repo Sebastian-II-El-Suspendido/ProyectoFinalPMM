@@ -7,4 +7,49 @@
     <string name="entrar">Entrar</string>
     <string name="registrar">¿Aún no tienes cuenta? Regístrate ya.</string>
     <string name="Entrar">LogIn</string>
+    <string name="register">Regístrate</string>
+
+
+
+    <!--Text Views activity_main.xml-->
+    <string name="TextViewNombre">Nombre</string>
+    <string name="TextViewRaza">Raza</string>
+    <string name="TextViewClase">Clase</string>
+    <string name="TextViewEstadoVital">Estado Vital</string>
+
+    <!--Edit Text activity_main.xml-->
+    <string name="HintTextNombre">Nombre</string>
+
+    <!--TextView activity_personaje_creado.xml-->
+    <string name="Nom">Nombre</string>
+    <string name="Raz">Raza</string>
+    <string name="Clas">Clase</string>
+    <string name="EstV">Estado Vital</string>
+    <!--Listas Spinners activity_main.xml-->
+    <string-array name="spinnerRaza">
+        <item>/</item>
+        <item>Humano</item>
+        <item>Elfo</item>
+        <item>Enano</item>
+        <item>Maldito</item>
+    </string-array>
+
+    <string-array name="spinnerClase">
+        <item>/</item>
+        <item>Brujo</item>
+        <item>Mago</item>
+        <item>Guerrero</item>
+    </string-array>
+
+    <string-array name="spinnerEstadoVital">
+        <item>/</item>
+        <item>Anciano</item>
+        <item>Adulto</item>
+        <item>Joven</item>
+    </string-array>
+
+    <!--Button activity_main.xml-->
+    <string name="CrearPersonaje">Crear Personaje</string>
+
+    <string name="enviarMensaje">Faltan Parametros</string>
 </resources>

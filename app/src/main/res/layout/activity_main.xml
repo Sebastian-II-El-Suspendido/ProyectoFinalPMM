@@ -87,9 +87,8 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="200dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:background="#712F2F"
             android:backgroundTint="@color/themeButton"
             android:text="@string/jugar"
             android:textColor="@color/white"
@@ -102,21 +101,19 @@
 
         <TextView
             android:id="@+id/btnToSignUp"
-            style="?attr/materialButtonOutlinedStyle"
+
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
+
             android:layout_marginEnd="40dp"
-            android:background="@drawable/borde"
             android:elevation="2dp"
+            android:gravity="center"
             android:text="@string/registrar"
-            android:textColor="@color/white"
-            android:textColorHighlight="@color/white"
-            android:textColorHint="@color/white"
+
+            android:textColor="#FFD600 "
             android:textSize="12sp"
-            android:textStyle="bold"
-            app:cornerRadius="15dp" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -146,7 +143,7 @@
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"
             app:boxBackgroundMode="none"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/white">
 
             <EditText
                 android:id="@+id/editTextEmailReg"
@@ -157,8 +154,9 @@
                 android:hint="@string/username"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
+
                 android:paddingBottom="12dp"
-                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -171,12 +169,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/borde"
+
             android:gravity="center"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"
             app:boxBackgroundMode="none"
-            app:hintTextColor="@color/black"
+            app:hintTextColor="@color/white"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -189,7 +188,7 @@
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:paddingBottom="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -231,9 +230,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:background="#712F2F"
             android:backgroundTint="@color/themeButton"
-            android:text="@string/jugar"
+            android:text="@string/register"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"
@@ -242,28 +240,11 @@
             app:iconTint="@color/white"
             app:strokeColor="@color/white" />
 
-        <TextView
-            android:id="@+id/btnToLogIn"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/borde"
-            android:elevation="2dp"
-            android:text="@string/registrar"
-            android:textColor="@color/white"
-            android:textColorHighlight="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:cornerRadius="15dp" />
-
     </LinearLayout>
 
     <Button
         android:id="@+id/button"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:layout_weight="1"
@@ -271,6 +252,7 @@
         android:text="@string/entrar"
         android:textColor="@color/white"
         android:textSize="20sp"
+
         android:visibility="visible"
         app:cornerRadius="15dp"
         app:iconTint="@color/white"
@@ -279,4 +261,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/white" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
 </androidx.constraintlayout.widget.ConstraintLayout>
