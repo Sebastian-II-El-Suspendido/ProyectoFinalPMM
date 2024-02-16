@@ -1,7 +1,6 @@
 package com.example.proyectofinalpmm
 
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
@@ -37,8 +36,6 @@ class MainActivity : BaseActivity() {
     private lateinit var passwordFieldReg: EditText
     private lateinit var comfirmPasswordFieldReg: EditText
     private lateinit var signUpButton: Button
-    private lateinit var toLogInButton: TextView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,12 +79,16 @@ class MainActivity : BaseActivity() {
 
         bindService(musica, serviceConnection, BIND_AUTO_CREATE)
 
-
         jugar.setOnClickListener {
             if (FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty())
                 login()
             else {
-                Log.i("hola", "todo correcto")
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        CreacionPersonajeActivity::class.java
+                    )
+                )
             }
         }
     }
@@ -192,11 +193,6 @@ class MainActivity : BaseActivity() {
                     else Toast.makeText(this, "Error al iniciar sesion", Toast.LENGTH_SHORT).show()
             }
         }
-
-        toLogInButton.setOnClickListener {
-            login()
-        }
-
     }
 
     private fun isValidEmail(email: String): Boolean =
