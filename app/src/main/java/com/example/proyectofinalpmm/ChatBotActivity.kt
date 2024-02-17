@@ -1,6 +1,7 @@
 package com.example.proyectofinalpmm
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +14,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectofinalpmm.databinding.ActivityChatBotBinding
+import java.util.Locale
 
-class ChatBotActivity : BaseActivity() {
+class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
+    private lateinit var textToSpeech: TextToSpeech
+
     private lateinit var binding: ActivityChatBotBinding
 
     private lateinit var eleccion: LinearLayout
@@ -37,6 +41,9 @@ class ChatBotActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBotBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // text to speech
+        textToSpeech = TextToSpeech(this, this)
 
         // Enlazar vistas
 
@@ -68,7 +75,7 @@ class ChatBotActivity : BaseActivity() {
         elfoImg.setOnClickListener {
             personaje = PersonajeP(
                 "Francisdo el elfo",
-                PersonajeP.Raza.Humano,
+                PersonajeP.Raza.Elfo,
                 PersonajeP.Clase.entries.random(),
                 PersonajeP.EstadoVital.entries.random(),
                 this
@@ -79,8 +86,8 @@ class ChatBotActivity : BaseActivity() {
 
         enanoImg.setOnClickListener {
             personaje = PersonajeP(
-                "Pepe el humano",
-                PersonajeP.Raza.Humano,
+                "Paco el enano",
+                PersonajeP.Raza.Enano,
                 PersonajeP.Clase.entries.random(),
                 PersonajeP.EstadoVital.entries.random(),
                 this
@@ -91,8 +98,8 @@ class ChatBotActivity : BaseActivity() {
 
         malditoImg.setOnClickListener {
             personaje = PersonajeP(
-                "Pepe el humano",
-                PersonajeP.Raza.Humano,
+                "Lucifer el maldito",
+                PersonajeP.Raza.Maldito,
                 PersonajeP.Clase.entries.random(),
                 PersonajeP.EstadoVital.entries.random(),
                 this
@@ -103,8 +110,12 @@ class ChatBotActivity : BaseActivity() {
 
         btnEnviar.setOnClickListener {
             if (!msg.text.isNullOrEmpty()) {
-                messageList.add(Mensajes(msg.text.toString(), "Usuario"))
-                messageList.add(Mensajes(personaje?.comunicacion(msg.text.toString()) ?: "Default" , personaje?.getNombre() ?: "Default"))
+                val mensaje = msg.text.toString()
+                val respuesta = personaje?.comunicacion(msg.text.toString()) ?: "Default"
+                messageList.add(Mensajes(mensaje, "Usuario"))
+                textToSpeech.speak(mensaje, TextToSpeech.QUEUE_ADD, null, null)
+                messageList.add(Mensajes( respuesta, personaje?.getNombre() ?: "Default"))
+                textToSpeech.speak(respuesta, TextToSpeech.QUEUE_ADD, null, null)
                 messageAdapter.notifyDataSetChanged()
                 binding.recyclerViewMessages.smoothScrollToPosition(messageList.size - 1)
             }
@@ -114,11 +125,22 @@ class ChatBotActivity : BaseActivity() {
         messageAdapter = MessageAdapter(messageList)
         binding.recyclerViewMessages.adapter = messageAdapter
         binding.recyclerViewMessages.layoutManager = LinearLayoutManager(this)
+    }
 
-        messageList.add(Mensajes("Hola", "Usuario"))
-        messageList.add(Mensajes("Hola, ¿cómo estás?", "ChatBot"))
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val result = textToSpeech.setLanguage(Locale("es", "ES"))
 
-        messageAdapter.notifyDataSetChanged()
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                textToSpeech.setLanguage(Locale("es", "ES"))
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        textToSpeech.stop()
+        textToSpeech.shutdown()
+        super.onDestroy()
     }
 }
 

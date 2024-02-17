@@ -8,7 +8,7 @@ class Mensajes(
     val sender : String
 )
 
-class Articulos(private var tipoArticulo: TipoArticulo, private var nombre: Nombre, private var peso: Int, private var precio : Int, private var uri : Int, private var unidades : Int):
+class Articulos(private var tipoArticulo: TipoArticulo, private var nombre: Nombre, private var peso: Int, private var precio : Int, private var uri : Int):
     Serializable {
 
     enum class TipoArticulo { ARMA, OBJETO, ORO }
@@ -30,10 +30,6 @@ class Articulos(private var tipoArticulo: TipoArticulo, private var nombre: Nomb
 
     fun getUri(): Int{
         return uri
-    }
-
-    fun getUnidades(): Int{
-        return unidades
     }
 
     override fun toString(): String {
