@@ -85,7 +85,7 @@ class MainActivity : BaseActivity() {
                 startActivity(
                     Intent(
                         this@MainActivity,
-                        ChatBotActivity::class.java
+                        CreacionPersonajeActivity::class.java
                     )
                 )
             }
