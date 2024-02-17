@@ -16,7 +16,7 @@ class GestionObjetos : BaseActivity() {
         binding = ActivityGestionObjetosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mochila = Mochila(100)
+        val mochila = Mochila(100, this)
         mochila.addArticulo(Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 15, 0, 10))
 /*
         val dbHelper = ObjetosAleatorios(this)

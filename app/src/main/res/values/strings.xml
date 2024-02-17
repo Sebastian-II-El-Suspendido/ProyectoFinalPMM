@@ -10,7 +10,6 @@
     <string name="register">Regístrate</string>
 
 
-
     <!--Text Views activity_main.xml-->
     <string name="TextViewNombre">Nombre</string>
     <string name="TextViewRaza">Raza</string>
@@ -52,4 +51,7 @@
     <string name="CrearPersonaje">Crear Personaje</string>
 
     <string name="enviarMensaje">Faltan Parametros</string>
+    <string name="elige_con_quien_quieres_hablar">Elige con quien quieres hablar</string>
+    <string name="escribe_un_mensaje">Escribe un mensaje</string>
+    <string name="enviar">Enviar</string>
 </resources>
