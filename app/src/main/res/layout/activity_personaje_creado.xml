@@ -2,8 +2,150 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/fondocreado"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PersonajeCreadoActivity">
 
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="385dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bordemarcos"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:outlineAmbientShadowColor="#3D4D5C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:fontFamily="@font/silk_bold"
+            android:textColor="#404040"
+            android:textSize="20sp"
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="@string/Raz" />
+
+        <TextView
+            android:fontFamily="@font/silk_bold"
+            android:textColor="#404040"
+            android:textSize="20sp"
+            android:id="@+id/RazaPersonaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:fontFamily="@font/silk_bold"
+            android:textColor="#404040"
+            android:textSize="20sp"
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="@string/Clas" />
+
+        <TextView
+            android:fontFamily="@font/silk_bold"
+            android:textColor="#404040"
+            android:textSize="20sp"
+            android:id="@+id/ClasePersonaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:fontFamily="@font/silk_bold"
+            android:textColor="#404040"
+            android:textSize="20sp"
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="@string/EstV" />
+
+        <TextView
+            android:fontFamily="@font/silk_bold"
+            android:textColor="#404040"
+            android:textSize="20sp"
+            android:id="@+id/EstadoVitalPersonaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:background="@drawable/guerrero_humano_adulto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
+
+    <TextView
+        android:id="@+id/NombrePersonaje"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/bordemarcos"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:hint="@string/HintTextNombre"
+        android:inputType="text"
+        android:maxWidth="200dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#404040"
+        android:textColorHint="#404040"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.92" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6B8096"
+        android:gravity="center"
+        android:fontFamily="@font/silk_bold"
+        android:stateListAnimator="@android:anim/accelerate_interpolator"
+        android:textColor="#404040"
+        android:layout_marginTop="32dp"
+        android:text="@string/butonAtras"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,57 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondorandom"
     tools:context=".RandomActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+    <Button
+        android:id="@+id/btnDado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="336dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="@string/dados"
+        android:textColor="#404040"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Nivel Inicial"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.821"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="Animation - 1708179415668.json"
+        app:lottie_loop="false" />
 
-        <ImageView
-            android:id="@+id/imgfondo"
-            android:layout_width="match_parent"
-            android:layout_height="363dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="309dp"
-          />
+    <TextView
+        android:id="@+id/txtDescripcion"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/bordemarcos"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="198dp"
-            android:gravity="center"
-            android:text="Comienza la aventura, pulsa el DADO para avanzar. CUIDADO puedes encontrarte enemigos"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/btnDado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="161dp"
-            android:layout_marginBottom="253dp"
-            android:text="Dado" />
-
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

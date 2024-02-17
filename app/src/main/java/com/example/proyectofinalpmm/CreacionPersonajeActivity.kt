@@ -5,6 +5,7 @@ import android.os.Bundle
 
 //ActivityCorrespondiente a MainActivity del ejercicio 1
 import android.content.Intent
+import android.renderscript.ScriptGroup.Binding
 
 import android.view.View
 import android.widget.AdapterView
@@ -13,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import com.example.proyectofinalpmm.databinding.ActivityCreacionPersonajeBinding
 import com.google.android.material.snackbar.Snackbar
 
 class CreacionPersonajeActivity : BaseActivity() {
@@ -22,9 +24,11 @@ class CreacionPersonajeActivity : BaseActivity() {
     private lateinit var spinnerEstadoVital : Spinner
     private lateinit var editTextNombre : EditText
     private lateinit var imagen : ImageView
+    private lateinit var binding: ActivityCreacionPersonajeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_creacion_personaje)
+        binding = ActivityCreacionPersonajeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupSpinner()
 
         editTextNombre = findViewById(R.id.nombreEditText)
@@ -74,6 +78,14 @@ class CreacionPersonajeActivity : BaseActivity() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+
+
+            binding.button3.setOnClickListener {
+                val intent2 = Intent(this, PersonajeCreadoActivity::class.java)
+                startActivity(intent2)
+            }
+
+
         }
 
         spinnerRaza.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

@@ -44,7 +44,6 @@ class MainActivity : BaseActivity() {
 
         // Inicio
         jugar = binding.button
-
         // Login
         conjunto = binding.conjunto
         emailField = binding.editTextEmail
@@ -91,6 +90,12 @@ class MainActivity : BaseActivity() {
                 )
             }
         }
+
+
+        binding.button2.setOnClickListener {
+            intent = Intent(this, CreacionPersonajeActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun login() {
@@ -100,7 +105,6 @@ class MainActivity : BaseActivity() {
         logInButton.setOnClickListener {
             val email = emailField.text.toString()
             val password = passwordField.text.toString()
-
             if (isValidEmail(email) && isValidPassword(password))
                 FirebaseAuth
                     .getInstance()

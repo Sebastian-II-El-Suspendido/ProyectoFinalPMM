@@ -9,6 +9,12 @@
     <string name="Entrar">LogIn</string>
     <string name="register">Regístrate</string>
 
+    <string name="dados">Lanzar dados</string>
+
+    <!--Text Personaje Creado.xml-->
+    <string name="butonAtras">Atrás</string>
+
+
 
     <!--Text Views activity_main.xml-->
     <string name="TextViewNombre">Nombre</string>

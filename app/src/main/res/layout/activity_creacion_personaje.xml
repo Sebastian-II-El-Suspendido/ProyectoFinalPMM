@@ -11,46 +11,49 @@
 
     <ImageView
         android:id="@+id/imagen"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/botonCrearPersonaje"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/guerrero_humano_adulto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreEditText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/botonCrearPersonaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:backgroundTint="#6B8096"
         android:gravity="center"
+        android:fontFamily="@font/silk_bold"
         android:stateListAnimator="@android:anim/accelerate_interpolator"
         android:text="@string/CrearPersonaje"
         android:textColor="#404040"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
 
     <EditText
         android:id="@+id/nombreEditText"
-        android:layout_width="@dimen/activityMainCompWidth"
+        android:layout_width="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_height="50dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/bordemarcos"
         android:gravity="center"
+        android:maxWidth="200dp"
         android:hint="@string/HintTextNombre"
         android:inputType="text"
+        android:fontFamily="@font/silk_bold"
         android:textColor="#404040"
         android:textColorHint="#404040"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,9 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="@string/TextViewRaza"
+            android:fontFamily="@font/silk_bold"
             android:textColor="#404040"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:text="@string/TextViewRaza"/>
 
         <Spinner
             android:id="@+id/spinnerRaza"
@@ -94,6 +98,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@string/TextViewClase"
+            android:fontFamily="@font/silk_bold"
             android:textColor="#404040"
             android:textSize="20sp" />
 
@@ -112,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-
+            android:fontFamily="@font/silk_bold"
             android:text="@string/TextViewEstadoVital"
             android:textColor="#404040"
             android:textSize="20sp" />
@@ -127,4 +132,15 @@
 
             android:entries="@array/spinnerEstadoVital" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.947" />
 </androidx.constraintlayout.widget.ConstraintLayout>
