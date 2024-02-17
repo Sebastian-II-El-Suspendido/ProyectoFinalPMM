@@ -1,12 +1,9 @@
 package com.example.proyectofinalpmm
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-
 //ActivityCorrespondiente a MainActivity del ejercicio 1
-import android.content.Intent
-import android.renderscript.ScriptGroup.Binding
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,22 +11,35 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityCreacionPersonajeBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class CreacionPersonajeActivity : BaseActivity() {
-    private lateinit var boton : Button
-    private lateinit var spinnerRaza : Spinner
-    private lateinit var spinnerClase : Spinner
-    private lateinit var spinnerEstadoVital : Spinner
-    private lateinit var editTextNombre : EditText
-    private lateinit var imagen : ImageView
+    private lateinit var boton: Button
+    private lateinit var spinnerRaza: Spinner
+    private lateinit var spinnerClase: Spinner
+    private lateinit var spinnerEstadoVital: Spinner
+    private lateinit var editTextNombre: EditText
+    private lateinit var imagen: ImageView
     private lateinit var binding: ActivityCreacionPersonajeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreacionPersonajeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupSpinner()
+
+        val auth = FirebaseAuth.getInstance()
+        val idUser = auth.currentUser?.uid
+        val dbHelper = SQLiteHelper(this)
+        val personaje = idUser?.let { dbHelper.obtenerPersonajePorID(it, this) }
+        if (personaje!=null){
+            startActivity(Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java))
+        }else{
+            dbHelper.iniciarArticulos()
+        }
 
         editTextNombre = findViewById(R.id.nombreEditText)
         spinnerRaza = findViewById(R.id.spinnerRaza)
@@ -38,40 +48,42 @@ class CreacionPersonajeActivity : BaseActivity() {
         imagen = findViewById(R.id.imagen)
 
         boton = findViewById(R.id.botonCrearPersonaje)
-        boton.setOnClickListener{
-            val valido = (editTextNombre.text.length >= 3 && editTextNombre.text.isNotEmpty()) &&
-                    spinnerRaza.selectedItemId.toInt() != 0 &&
-                    spinnerClase.selectedItemId.toInt() != 0 &&
-                    spinnerEstadoVital.selectedItemId.toInt() != 0
+        boton.setOnClickListener {
+            val valido = (
+                            editTextNombre.text.isNotEmpty() &&
+                            spinnerRaza.selectedItemId.toInt() != 0 &&
+                            spinnerClase.selectedItemId.toInt() != 0 &&
+                            spinnerEstadoVital.selectedItemId.toInt() != 0)
 
-            if (valido){
-                val raza = when(spinnerRaza.selectedItemId.toInt()){
-                    1 -> Personaje.Raza.Humano
-                    2 -> Personaje.Raza.Elfo
-                    3 -> Personaje.Raza.Enano
-                    4 -> Personaje.Raza.Maldito
-                    else -> Personaje.Raza.Humano
+            if (valido) {
+                val raza = when (spinnerRaza.selectedItemId.toInt()) {
+                    1 -> PersonajeP.Raza.Humano
+                    2 -> PersonajeP.Raza.Elfo
+                    3 -> PersonajeP.Raza.Enano
+                    4 -> PersonajeP.Raza.Maldito
+                    else -> PersonajeP.Raza.Humano
                 }
 
-                val clase = when(spinnerClase.selectedItemId.toInt()){
-                    1 -> Personaje.Clase.Brujo
-                    2 -> Personaje.Clase.Mago
-                    3 -> Personaje.Clase.Guerrero
-                    else -> Personaje.Clase.Brujo
+                val clase = when (spinnerClase.selectedItemId.toInt()) {
+                    1 -> PersonajeP.Clase.Brujo
+                    2 -> PersonajeP.Clase.Mago
+                    3 -> PersonajeP.Clase.Guerrero
+                    else -> PersonajeP.Clase.Brujo
                 }
 
-                val estadoVital = when(spinnerEstadoVital.selectedItemId.toInt()){
-                    1 -> Personaje.EstadoVital.Anciano
-                    2 -> Personaje.EstadoVital.Adulto
-                    3 -> Personaje.EstadoVital.Joven
-                    else -> Personaje.EstadoVital.Anciano
+                val estadoVital = when (spinnerEstadoVital.selectedItemId.toInt()) {
+                    1 -> PersonajeP.EstadoVital.Anciano
+                    2 -> PersonajeP.EstadoVital.Adulto
+                    3 -> PersonajeP.EstadoVital.Joven
+                    else -> PersonajeP.EstadoVital.Anciano
                 }
 
-                val p = Personaje(editTextNombre.text.toString(), raza, clase, estadoVital)
+                //val p = Personaje(editTextNombre.text.toString(), raza, clase, estadoVital)
+                val personajeP = PersonajeP(editTextNombre.text.toString(), raza, clase, estadoVital, this)
+                dbHelper.insertarPersonaje(personajeP, auth.currentUser?.uid ?: "")
                 intent = Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java)
-                intent.putExtra("personaje", p)
                 startActivity(intent)
-            }else {
+            } else {
                 Snackbar.make(
                     findViewById(R.id.mainXML),
                     R.string.enviarMensaje,
@@ -89,23 +101,41 @@ class CreacionPersonajeActivity : BaseActivity() {
         }
 
         spinnerRaza.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 cambiarImagen()
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         spinnerClase.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 cambiarImagen()
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         spinnerEstadoVital.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 cambiarImagen()
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
@@ -125,7 +155,7 @@ class CreacionPersonajeActivity : BaseActivity() {
         }
     }
 
-    fun cambiarImagen(){
+    fun cambiarImagen() {
         /*
         val raza = spinnerRaza.selectedItem.toString().lowercase()
         val clase = spinnerClase.selectedItem.toString().lowercase()

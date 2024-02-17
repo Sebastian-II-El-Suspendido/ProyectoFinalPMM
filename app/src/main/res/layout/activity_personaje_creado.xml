@@ -5,7 +5,8 @@
     android:background="@drawable/fondocreado"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonajeCreadoActivity">
+    tools:context=".PersonajeCreadoActivity"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="220dp"

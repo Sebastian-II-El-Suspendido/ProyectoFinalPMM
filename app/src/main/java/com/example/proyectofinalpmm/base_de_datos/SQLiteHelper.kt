@@ -65,12 +65,12 @@ class SQLiteHelper(context: Context) :
                         "$COLUMN_PESO INTEGER," +
                         "$COLUMN_PRECIO INTEGER," +
                         "$COLUMN_TIPO_ARTICULO TEXT," +
-                        "$COLUMN_ID_IMAGEN INTEGER"
+                        "$COLUMN_ID_IMAGEN INTEGER)"
                 )
 
         val createTablePersonaje = (
                 "CREATE TABLE IF NOT EXISTS $TABLA_PERSONAJE (" +
-                        "$COLUMN_ID_USER INTEGER PRIMARY KEY," +
+                        "$COLUMN_ID_USER TEXT PRIMARY KEY," +
                         "$COLUMN_NOMBRE_PERSONAJE TEXT," +
                         "$COLUMN_RAZA TEXT," +
                         "$COLUMN_CLASE TEXT," +
@@ -80,13 +80,13 @@ class SQLiteHelper(context: Context) :
 
         val createTableMercader = (
                 "CREATE TABLE IF NOT EXISTS $TABLA_MERCADER (" +
-                        "$COLUMN_ID_MERCADER INTEGER PRIMARY KEY"
+                        "$COLUMN_ID_MERCADER TEXT PRIMARY KEY)"
                 )
 
         val createTableRelacionPersonajeObjetos = (
                 "CREATE TABLE IF NOT EXISTS $TABLA_PERSONAJE_ARTICULOS (" +
-                        "$COLUMN_ID_RELACION_PERSONAJE_OBJETOS INTEGER PRIMARY KEY," +
-                        "$COLUMN_ID_PERSONAJE_REL INTEGER," +
+                        "$COLUMN_ID_RELACION_PERSONAJE_OBJETOS TEXT PRIMARY KEY," +
+                        "$COLUMN_ID_PERSONAJE_REL TEXT," +
                         "$COLUMN_ID_OBJETO_REL_OP INTEGER," +
                         "$COLUMN_CANTIDAD_OP INTEGER," +
                         "FOREIGN KEY($COLUMN_ID_PERSONAJE_REL) REFERENCES $TABLA_PERSONAJE($COLUMN_ID_USER)," +
@@ -95,8 +95,8 @@ class SQLiteHelper(context: Context) :
 
         val createTableRelacionMercaderObjetos = (
                 "CREATE TABLE IF NOT EXISTS $TABLA_MERCADER_ARTICULOS (" +
-                        "$COLUMN_ID_RELACION_MERCADER_OBJETOS INTEGER PRIMARY KEY," +
-                        "$COLUMN_ID_MERCADER_REL INTEGER," +
+                        "$COLUMN_ID_RELACION_MERCADER_OBJETOS TEXT PRIMARY KEY," +
+                        "$COLUMN_ID_MERCADER_REL TEXT," +
                         "$COLUMN_ID_OBJETO_REL_OM INTEGER," +
                         "$COLUMN_CANTIDAD_OM INTEGER," +
                         "FOREIGN KEY($COLUMN_ID_MERCADER_REL) REFERENCES $TABLA_MERCADER($COLUMN_ID_MERCADER)," +
@@ -105,8 +105,8 @@ class SQLiteHelper(context: Context) :
 
         val createTableChat = (
                 "CREATE TABLE IF NOT EXISTS $TABLA_CHAT (" +
-                        "$COLUMN_ID_CHAT INTEGER PRIMARY KEY," +
-                        "$COLUMN_ID_PERSONAJE INTEGER," +
+                        "$COLUMN_ID_CHAT TEXT PRIMARY KEY," +
+                        "$COLUMN_ID_PERSONAJE TEXT," +
                         "$COLUMN_CONTENIDO TEXT," +
                         "FOREIGN KEY($COLUMN_ID_PERSONAJE) REFERENCES $TABLA_PERSONAJE($COLUMN_ID_USER))"
                 )
@@ -122,8 +122,6 @@ class SQLiteHelper(context: Context) :
                 createTableChat
             ), db
         )
-
-        iniciarArticulos()
     }
 
     private fun crearTablas(tablas: Array<String>, db: SQLiteDatabase?) {
@@ -132,27 +130,37 @@ class SQLiteHelper(context: Context) :
         }
     }
 
-    private fun iniciarArticulos(){
-        val listaArticulos = arrayListOf(
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, 1),
-            Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 10, 15, 1),
-            Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, 1),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.GRIMORIO, 10, 10, 1),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.HUEVO, 15, 20, 1),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, 1),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.PERGAMINOS, 5, 5, 1),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.POCION, 5, 15, 1),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.RUNAS, 5, 15, 1),
-            Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, 1)
-        )
-        listaArticulos.forEach { insertarArticulo( it ) }
+    fun iniciarArticulos() {
+        val db = this.readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLA_OBJETOS"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+
+        if (count == 0) {
+            val listaArticulos = arrayListOf(
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, 1),
+                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 10, 15, 1),
+                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, 1),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.GRIMORIO, 10, 10, 1),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.HUEVO, 15, 20, 1),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, 1),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.PERGAMINOS, 5, 5, 1),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.POCION, 5, 15, 1),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.RUNAS, 5, 15, 1),
+                Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, 1)
+            )
+
+            listaArticulos.forEach { insertarArticulo(it) }
+        }
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
     }
 
-    fun insertarPersonaje(personajeP: PersonajeP, id: Int): Long {
+    fun insertarPersonaje(personajeP: PersonajeP, id: String): Long {
         val db = this.writableDatabase
         val nombre = personajeP.getNombre()
         val raza = personajeP.getRaza().toString()
@@ -172,7 +180,7 @@ class SQLiteHelper(context: Context) :
     }
 
     @SuppressLint("Range")
-    fun obtenerPersonajePorID(id: Int, context: Context): PersonajeP? {
+    fun obtenerPersonajePorID(id: String, context: Context): PersonajeP? {
         val selectQuery = "SELECT * FROM $TABLA_PERSONAJE WHERE $COLUMN_ID_USER = ?"
         val db = this.readableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(id.toString()))
@@ -215,7 +223,7 @@ class SQLiteHelper(context: Context) :
         return personaje
     }
 
-    fun agregarArticuloPersonaje(idPersonaje: Int, idObjeto: Int, cantidad: Int) {
+    fun agregarArticuloPersonaje(idPersonaje: String, idObjeto: Int, cantidad: Int) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_ID_PERSONAJE_REL, idPersonaje)
@@ -225,17 +233,18 @@ class SQLiteHelper(context: Context) :
         db?.insert(TABLA_PERSONAJE_ARTICULOS, null, contentValues)
     }
 
-    fun actualizarArticuloPersonaje(idPersonaje: Int, idObjeto: Int, nuevaCantidad: Int) {
+    fun actualizarArticuloPersonaje(idPersonaje: String, idObjeto: Int, nuevaCantidad: Int) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_CANTIDAD_OP, nuevaCantidad)
         }
-        val whereClause = "$COLUMN_ID_PERSONAJE_REL = $idPersonaje AND $COLUMN_ID_OBJETO_REL_OP = $idObjeto"
-        val whereArgs = arrayOf(idPersonaje.toString(), idObjeto.toString())
+        val whereClause =
+            "$COLUMN_ID_PERSONAJE_REL = $idPersonaje AND $COLUMN_ID_OBJETO_REL_OP = $idObjeto"
+        val whereArgs = arrayOf(idPersonaje, idObjeto.toString())
         db.update(TABLA_PERSONAJE_ARTICULOS, contentValues, whereClause, whereArgs)
     }
 
-    fun insertarMercader(id: Int){
+    fun insertarMercader(id: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_ID_MERCADER, id)
@@ -243,7 +252,7 @@ class SQLiteHelper(context: Context) :
         db.insert(TABLA_MERCADER, null, values)
     }
 
-    fun agregarArticuloMercader(idMercader: Int, idObjeto: Int, cantidad: Int) {
+    fun agregarArticuloMercader(idMercader: String, idObjeto: Int, cantidad: Int) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_ID_MERCADER_REL, idMercader)
@@ -253,12 +262,13 @@ class SQLiteHelper(context: Context) :
         db?.insert(TABLA_MERCADER_ARTICULOS, null, contentValues)
     }
 
-    fun actualizarArticuloMercader(idMercader: Int, idObjeto: Int, nuevaCantidad: Int) {
+    fun actualizarArticuloMercader(idMercader: String, idObjeto: Int, nuevaCantidad: Int) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_CANTIDAD_OM, nuevaCantidad)
         }
-        val whereClause = "$COLUMN_ID_MERCADER_REL = $idMercader AND $COLUMN_ID_OBJETO_REL_OM = $idObjeto"
+        val whereClause =
+            "$COLUMN_ID_MERCADER_REL = $idMercader AND $COLUMN_ID_OBJETO_REL_OM = $idObjeto"
         val whereArgs = arrayOf(idMercader.toString(), idObjeto.toString())
         db.update(TABLA_MERCADER_ARTICULOS, contentValues, whereClause, whereArgs)
     }
@@ -308,7 +318,7 @@ class SQLiteHelper(context: Context) :
     }
 
     @SuppressLint("Range")
-    fun obtenerListaArticulos() : ArrayList<Articulos>{
+    fun obtenerListaArticulos(): ArrayList<Articulos> {
         val db = this.readableDatabase
         val selectQuery =
             "SELECT * FROM $TABLA_OBJETOS"
@@ -317,7 +327,8 @@ class SQLiteHelper(context: Context) :
 
         if (cursor.moveToFirst()) {
             val tipoArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_TIPO_ARTICULO))
-            val nombreArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
+            val nombreArticuloString =
+                cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
             val peso = cursor.getInt(cursor.getColumnIndex(COLUMN_PESO))
             val precio = cursor.getInt(cursor.getColumnIndex(COLUMN_PRECIO))
             val uri = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_IMAGEN))
@@ -329,7 +340,7 @@ class SQLiteHelper(context: Context) :
                 else -> Articulos.TipoArticulo.OBJETO
             }
 
-            val nombreArticulo = when(nombreArticuloString){
+            val nombreArticulo = when (nombreArticuloString) {
                 "AMULETO" -> Articulos.Nombre.AMULETO
                 "BASTON" -> Articulos.Nombre.BASTON
                 "DAGA" -> Articulos.Nombre.DAGA
