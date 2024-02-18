@@ -32,6 +32,13 @@ class RandomActivity : BaseActivity() {
         }
 
 
+        binding.enemigo.setOnClickListener {
+            val intent = Intent(this, EnemigoActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         val btnDado = findViewById<Button>(R.id.btnDado)
         btnDado.setOnClickListener {
             RandomActivityFun()

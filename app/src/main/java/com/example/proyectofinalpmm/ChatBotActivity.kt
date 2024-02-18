@@ -298,6 +298,8 @@ class MessageAdapter(private val messageList: List<Mensajes>, private val imagen
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textContent: TextView = itemView.findViewById(R.id.textMessageContent)
         private val textSender: TextView = itemView.findViewById(R.id.textMessageSender)
+        private val imagen: ImageView = itemView.findViewById(R.id.imageView5)
+        private val imagenGif: ImageView = itemView.findViewById(R.id.GifChat)
         // private var animationView: LottieAnimationView = itemView.findViewById(R.id.animationView4)
         private var imageView : ImageView = itemView.findViewById(R.id.imageView5)
 
@@ -306,6 +308,15 @@ class MessageAdapter(private val messageList: List<Mensajes>, private val imagen
             //animationView.playAnimation()
             textSender.text = mensaje.sender
             imageView.setImageDrawable(id)
+
+            if(mensaje.sender=="Usuario"){
+                imagen.visibility = View.GONE
+                imagenGif.visibility= View.GONE
+
+            }
+
         }
     }
 }
+
+

@@ -8,14 +8,6 @@
     tools:context=".EnemigoActivity">
 
 
-    <View
-        android:id="@+id/black_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00000000"
-        android:visibility="gone" />
-
-
     <ImageView
         android:id="@+id/imgEnemigo"
         android:layout_width="150dp"
@@ -23,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="112dp"
         android:src="@drawable/enemigo1"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="236dp"
+        android:layout_marginEnd="244dp"
         android:backgroundTint="#6B8096"
         android:fontFamily="@font/silk_bold"
         android:gravity="center"
@@ -80,11 +73,124 @@
         android:id="@+id/imageView3"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.67"
         app:srcCompat="@drawable/guerrero_humano_adulto" />
+
+    <ImageView
+        android:id="@+id/Perdido"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondoperdido"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/Ganado"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondovictoria"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:id="@+id/PersonajeVictorioso"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="124dp"
+        android:src="@drawable/guerrero_humano_adulto"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifCalavera"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/perdidogif"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/blackOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000"
+        android:alpha="0"
+        android:visibility="gone"/>
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifex1"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/explosioncentral"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifex2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="128dp"
+        android:src="@drawable/intermitente1"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifex3"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/intermitente2"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifex4"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="128dp"
+        android:src="@drawable/intermitente3"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/bordemarcos"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="La pelea ha acabado y sales victorioso"
+        android:textColor="#404040"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
