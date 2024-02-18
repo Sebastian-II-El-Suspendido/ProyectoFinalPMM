@@ -5,7 +5,8 @@ import java.io.Serializable
 
 class Mensajes(
     val content : String,
-    val sender : String
+    val sender : String,
+    val reciver : String
 )
 
 class Articulos(private var tipoArticulo: TipoArticulo, private var nombre: Nombre, private var peso: Int, private var precio : Int, private var uri : Int):

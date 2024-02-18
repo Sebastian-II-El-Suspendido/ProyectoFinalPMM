@@ -42,6 +42,9 @@ class CreacionPersonajeActivity : BaseActivity() {
                 startActivity(Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java))
         }else{
             dbHelper.iniciarArticulos()
+            if (idUser != null) {
+                dbHelper.iniciarPersonajes(this)
+            }
         }
 
         editTextNombre = findViewById(R.id.nombreEditText)

@@ -6,8 +6,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonajeCreadoActivity"
-    android:orientation="horizontal">
+    tools:context=".PersonajeCreadoActivity">
 
     <LinearLayout
         android:layout_width="220dp"
