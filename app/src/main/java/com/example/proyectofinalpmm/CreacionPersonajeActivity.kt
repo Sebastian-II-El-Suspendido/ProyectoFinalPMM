@@ -47,6 +47,13 @@ class CreacionPersonajeActivity : BaseActivity() {
             }
         }
 
+
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this,AjustesActivity::class.java)
+            startActivity(intentb)
+        }
+
         editTextNombre = findViewById(R.id.nombreEditText)
         spinnerRaza = findViewById(R.id.spinnerRaza)
         spinnerClase = findViewById(R.id.spinnerClase)

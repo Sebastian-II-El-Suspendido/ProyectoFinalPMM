@@ -2,6 +2,7 @@ package com.example.proyectofinalpmm
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityPersonajeCreadoBinding
@@ -35,6 +36,13 @@ class PersonajeCreadoActivity : BaseActivity() {
             clasePersonaje.text = personaje.getClase().toString()
             estadoVitalPersonaje.text = personaje.getEstadoVital().toString()
             nombrePersonaje.text = personaje.getNombre()
+        }
+
+
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this,AjustesActivity::class.java)
+            startActivity(intentb)
         }
 
         binding.button4.setOnClickListener {

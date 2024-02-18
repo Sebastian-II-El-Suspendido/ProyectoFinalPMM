@@ -23,6 +23,8 @@ class ObjetosAleatorios(private val context: Context) :
 
     override fun onCreate(db: SQLiteDatabase?) {
 
+
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

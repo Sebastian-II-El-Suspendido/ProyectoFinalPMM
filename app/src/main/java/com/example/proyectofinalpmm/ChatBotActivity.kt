@@ -1,6 +1,7 @@
 package com.example.proyectofinalpmm
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -129,6 +130,13 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
             Log.i("hola", personaje.toString())
             eleccion.visibility = View.GONE
             chat.visibility = View.VISIBLE
+        }
+
+
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this,AjustesActivity::class.java)
+            startActivity(intentb)
         }
 
         elfoImg.setOnClickListener {
@@ -263,10 +271,10 @@ private fun juntarListas(lista: List<List<String>?>, nombre: String): MutableLis
     for ((mensaje1, mensaje2) in mensajes) {
         if (mensaje1.isNotEmpty() || mensaje2.isNotEmpty()) {
             if (mensaje1.isNotEmpty()) {
-                listaR.add(Mensajes(mensaje1, "TU", nombre))
+                listaR.add(Mensajes(mensaje1, "Tu", nombre))
             }
             if (mensaje2.isNotEmpty()) {
-                listaR.add(Mensajes(mensaje2, nombre, "TU"))
+                listaR.add(Mensajes(mensaje2, nombre, "Tu"))
             }
         }
     }
@@ -306,14 +314,15 @@ class MessageAdapter(private val messageList: List<Mensajes>, private val imagen
         fun bind(mensaje: Mensajes, id:Drawable) {
             animateText(textContent, mensaje.content)
             //animationView.playAnimation()
-            textSender.text = mensaje.sender
-            imageView.setImageDrawable(id)
-
-            if(mensaje.sender=="Usuario"){
+            if(mensaje.sender=="Tu"){
                 imagen.visibility = View.GONE
                 imagenGif.visibility= View.GONE
 
             }
+            textSender.text = mensaje.sender
+            imageView.setImageDrawable(id)
+
+
 
         }
     }

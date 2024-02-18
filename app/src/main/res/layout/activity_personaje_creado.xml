@@ -8,6 +8,7 @@
     tools:context=".PersonajeCreadoActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="385dp"
@@ -24,71 +25,71 @@
 
 
         <TextView
-            android:fontFamily="@font/silk_bold"
-            android:textColor="#404040"
-            android:textSize="20sp"
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="@string/Raz" />
+            android:text="@string/Raz"
+            android:textColor="#404040"
+            android:textSize="20sp" />
 
         <TextView
-            android:fontFamily="@font/silk_bold"
-            android:textColor="#404040"
-            android:textSize="20sp"
             android:id="@+id/RazaPersonaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#404040"
+            android:textSize="20sp" />
 
         <TextView
-            android:fontFamily="@font/silk_bold"
-            android:textColor="#404040"
-            android:textSize="20sp"
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="@string/Clas" />
+            android:text="@string/Clas"
+            android:textColor="#404040"
+            android:textSize="20sp" />
 
         <TextView
-            android:fontFamily="@font/silk_bold"
-            android:textColor="#404040"
-            android:textSize="20sp"
             android:id="@+id/ClasePersonaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#404040"
+            android:textSize="20sp" />
 
         <TextView
-            android:fontFamily="@font/silk_bold"
-            android:textColor="#404040"
-            android:textSize="20sp"
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="@string/EstV" />
+            android:text="@string/EstV"
+            android:textColor="#404040"
+            android:textSize="20sp" />
 
         <TextView
-            android:fontFamily="@font/silk_bold"
-            android:textColor="#404040"
-            android:textSize="20sp"
             android:id="@+id/EstadoVitalPersonaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#404040"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ImageView
@@ -126,12 +127,16 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="Button"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="@string/butonenxt"
+        android:textColor="#404040"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <Button
         android:id="@+id/button5"
@@ -147,4 +152,6 @@
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <include layout="@layout/ajustes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

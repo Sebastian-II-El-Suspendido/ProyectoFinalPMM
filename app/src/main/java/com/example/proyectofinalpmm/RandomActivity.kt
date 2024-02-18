@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofinalpmm.databinding.ActivityRandomBinding
 import kotlinx.coroutines.Delay
 import kotlinx.coroutines.delay
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 //ActivityCorrespondiente al MainActivity del ejercicio 2
 
@@ -21,8 +23,6 @@ class RandomActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRandomBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         animateText(binding.txtDescripcion,"Comienza la aventura, pulsa el DADO para avanzar. CUIDADO puedes encontrarte enemigos")
 
@@ -38,6 +38,11 @@ class RandomActivity : BaseActivity() {
         }
 
 
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this,AjustesActivity::class.java)
+            startActivity(intentb)
+        }
 
         val btnDado = findViewById<Button>(R.id.btnDado)
         btnDado.setOnClickListener {
@@ -49,7 +54,7 @@ class RandomActivity : BaseActivity() {
 
 
     private fun RandomActivityFun() {
-        val actividadAleatoria = Random.nextInt(4)
+        val actividadAleatoria = Random.nextInt(0..3)
         val animation = binding.animationView3
         animation.playAnimation()
 

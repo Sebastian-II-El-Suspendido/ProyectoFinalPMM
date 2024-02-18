@@ -133,6 +133,9 @@
 
             android:entries="@array/spinnerEstadoVital" />
     </LinearLayout>
+    <include
+        layout="@layout/ajustes"
+        />
 
     <Button
         android:id="@+id/button3"

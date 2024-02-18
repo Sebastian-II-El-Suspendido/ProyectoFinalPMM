@@ -98,5 +98,7 @@
             android:text="Button" />
     </LinearLayout>
 
+    <include layout="@layout/ajustes" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

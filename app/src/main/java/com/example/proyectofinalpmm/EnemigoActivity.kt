@@ -105,6 +105,13 @@ class EnemigoActivity : BaseActivity() {
         }
 
 
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this,AjustesActivity::class.java)
+            startActivity(intentb)
+        }
+
+
 
         //Boton Huir
         btnContinuarObjeto.setOnClickListener {

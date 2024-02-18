@@ -13,7 +13,9 @@
 
     <!--Text Personaje Creado.xml-->
     <string name="butonAtras">Atrás</string>
-
+    <string name="butonenxt">Continuar</string>
+    <string name="quit">Cerrar sesión</string>
+    <string name="mute">Silenciar música</string>
 
 
     <!--Text Views activity_main.xml-->
