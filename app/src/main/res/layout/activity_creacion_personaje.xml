@@ -90,6 +90,11 @@
             android:layout_width="@dimen/SpinnerTamWidth"
             android:layout_height="@dimen/SpinnerTamHeigh"
             android:layout_marginTop="5dp"
+            android:textColor="#404040"
+            android:fontFamily="@font/silk_bold"
+            android:popupBackground="@drawable/borderspinner"
+            android:background="@drawable/borderspinner"
+            android:textAlignment="center"
             android:entries="@array/spinnerRaza" />
 
         <TextView
@@ -106,9 +111,14 @@
         <Spinner
             android:id="@+id/spinnerClase"
             style="@android:style/Widget.Spinner"
+            android:background="@drawable/borderspinner"
             android:layout_width="@dimen/SpinnerTamWidth"
             android:layout_height="@dimen/SpinnerTamHeigh"
             android:layout_marginTop="5dp"
+            android:textColor="#404040"
+            android:fontFamily="@font/silk_bold"
+            android:popupBackground="@drawable/borderspinner"
+            android:textAlignment="center"
             android:entries="@array/spinnerClase" />
 
 
@@ -128,6 +138,11 @@
             style="@android:style/Widget.Spinner"
             android:layout_width="@dimen/SpinnerTamWidth"
             android:layout_height="@dimen/SpinnerTamHeigh"
+            android:textColor="#404040"
+            android:fontFamily="@font/silk_bold"
+            android:popupBackground="@drawable/borderspinner"
+            android:background="@drawable/borderspinner"
+            android:textAlignment="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
 

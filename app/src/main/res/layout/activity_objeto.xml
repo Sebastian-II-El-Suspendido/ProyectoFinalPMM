@@ -4,59 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoobjeto"
     tools:context=".ObjetoActivity">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+    <ImageView
+        android:id="@+id/imgCiudad"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="88dp"
+        android:src="@drawable/amuleto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+    <Button
+        android:id="@+id/btnRecoger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="192dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Recoger"
+        android:textColor="#404040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Nivel Objeto"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
+    <Button
+        android:id="@+id/btnContinuarObj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Continuar"
+        android:textColor="#404040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toEndOf="@+id/btnRecoger"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925" />
 
-        <ImageView
-            android:id="@+id/imgCiudad"
-            android:layout_width="match_parent"
-            android:layout_height="363dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="309dp"
-          />
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="230dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bordemarcos"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:textColor="#404040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.155" />
 
-        <Button
-            android:id="@+id/btnRecoger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="280dp"
-            android:layout_marginBottom="227dp"
-            android:text="Recoger" />
-
-        <Button
-            android:id="@+id/btnContinuarObj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="275dp"
-            android:layout_marginLeft="144dp"
-            android:layout_marginBottom="227dp"
-            android:layout_toRightOf="@id/btnRecoger"
-            android:text="Continuar" />
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

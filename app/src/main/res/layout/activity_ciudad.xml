@@ -4,59 +4,396 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondocasas"
     tools:context=".CiudadActivity">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      >
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="380dp"
+        android:layout_marginStart="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/bordemarcos"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#404040"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.516" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="364dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Atrás"
+        android:textColor="#404040"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.884" />
+
+    <Button
+        android:id="@+id/btnEntrar2"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Atrás"
+        android:textColor="#404040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnContinuarCiudad"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Comprar"
+        android:textColor="#404040"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnEntrar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.884" />
+
+    <HorizontalScrollView
+        android:id="@+id/ScrollComprar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordemarcos"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.565">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Nivel Ciudad"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Distrito de las Mil Fuentes"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Barrio de los Sueños Encantados"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="DPlaza del Dragón Dorado"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C1"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Callejón de las Sombras Veladas"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C2"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Sector de las Maravillas Arcanas"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C3"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Avenida de los Secretos Antiguos"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C4"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Zona de las Estrellas Errantes"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C5"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa7" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Pasaje de la Luna Plateada"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C7"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa8" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Barriada del Crepúsculo Eterno"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C8"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Calle de los Misterios Olvidados"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C9"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa10" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Sector de las Mariposas de Cristal"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C21"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa11" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15C112"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/silk_bold"
+                    android:gravity="center"
+                    android:text="Área de la Aurora Brillante"
+                    android:textColor="#404040"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageView2C221"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/casa12" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imgCiudad"
-            android:layout_width="match_parent"
-            android:layout_height="363dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="309dp"
-            />
 
-        <Button
-            android:id="@+id/btnEntrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="280dp"
-            android:layout_marginBottom="227dp"
-            android:text="Entrar" />
+    </HorizontalScrollView>
 
-        <Button
-            android:id="@+id/btnContinuarCiudad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="275dp"
-            android:layout_marginLeft="144dp"
-            android:layout_marginBottom="227dp"
-            android:layout_toRightOf="@id/btnEntrar"
-            android:text="Continuar" />
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

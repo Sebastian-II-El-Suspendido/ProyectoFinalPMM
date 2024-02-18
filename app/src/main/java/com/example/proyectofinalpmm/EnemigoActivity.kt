@@ -23,6 +23,7 @@ class EnemigoActivity : BaseActivity() {
     private lateinit var imgvictorioso: ImageView
     private lateinit var img: ImageView
     private lateinit var textito: TextView
+    private lateinit var btnVolver:Button
     private var enemigo: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +34,10 @@ class EnemigoActivity : BaseActivity() {
         img= findViewById(R.id.imgEnemigoDragon)
         fondovivo= findViewById(R.id.Ganado)
         imgvictorioso= findViewById(R.id.PersonajeVictorioso)
+        btnVolver = findViewById(R.id.button8)
 
         val num = Random.nextInt(0..10)
+        btnVolver.visibility=View.GONE
         textito.visibility=View.GONE
         img.visibility= View.GONE
         imgEnemigo.visibility= View.GONE
@@ -56,8 +59,6 @@ class EnemigoActivity : BaseActivity() {
              R.drawable.enemigodragon
         )
 
-
-
          enemigo = enemigoArray[num]
 
         imgEnemigo.setImageResource(enemigo!!)
@@ -69,8 +70,6 @@ class EnemigoActivity : BaseActivity() {
             imgEnemigo.visibility = View.VISIBLE
         }
 
-
-
         exploision1 = findViewById(R.id.gifex1)
         exploision2= findViewById(R.id.gifex2)
         exploision3= findViewById(R.id.gifex3)
@@ -78,15 +77,12 @@ class EnemigoActivity : BaseActivity() {
         calavera= findViewById(R.id.gifCalavera)
         fondomuerto = findViewById(R.id.Perdido)
 
-       calavera.visibility= View.GONE
+        calavera.visibility= View.GONE
         fondomuerto.visibility=View.GONE
         exploision1.visibility= View.GONE
         exploision2.visibility= View.GONE
         exploision3.visibility= View.GONE
         exploision4.visibility= View.GONE
-
-
-
 
         val btnRecoger = findViewById<Button>(R.id.btnLuchar)
         val btnContinuarObjeto = findViewById<Button>(R.id.btnHuir)
@@ -95,8 +91,6 @@ class EnemigoActivity : BaseActivity() {
         val overlayView = findViewById<View>(R.id.blackOverlay)
         overlayView.visibility = View.VISIBLE // Haz visible la vista de superposición
 
-
-
         //Boton luchar
         btnRecoger.setOnClickListener {
             val intent = Intent(this, TobeContinuedActivity::class.java)
@@ -104,14 +98,16 @@ class EnemigoActivity : BaseActivity() {
 
         }
 
+        btnVolver.setOnClickListener {
+            val intentV = Intent(this,RandomActivity::class.java)
+            startActivity(intentV)
+        }
 
         val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
         globalButton.setOnClickListener {
             val intentb = Intent(this,AjustesActivity::class.java)
             startActivity(intentb)
         }
-
-
 
         //Boton Huir
         btnContinuarObjeto.setOnClickListener {
@@ -145,6 +141,7 @@ class EnemigoActivity : BaseActivity() {
                         fondovivo.visibility= View.VISIBLE
                         imgvictorioso.visibility= View.VISIBLE
                         textito.visibility= View.VISIBLE
+                        btnVolver.visibility=View.VISIBLE
                         animateText(textito,"La batalla ha terminado y sales victorioso")
                     }
                     //else{ GANASTE !?
@@ -157,10 +154,6 @@ class EnemigoActivity : BaseActivity() {
 
                             overlay.visibility = View.GONE
 
-
-                            // Inicia la nueva Activity aquí para asegurar que la animación haya concluido
-                            val intent = Intent(this@EnemigoActivity, TobeContinuedActivity::class.java)
-                           // startActivity(intent)
                         }.start() // Asegúrate de iniciar esta animación
                 }, 5000) // Este delay determina cuánto tiempo después de la animación de fundido a negro se ejecutan las acciones
             }.start() // Inicia la animación de fundido a negro
