@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityCreacionPersonajeBinding
+import com.example.proyectofinalpmm.musica.Musica
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -34,15 +35,31 @@ class CreacionPersonajeActivity : BaseActivity() {
         val modificar = intent.getBooleanExtra("modificar", false)
 
         val auth = FirebaseAuth.getInstance()
-        val idUser = auth.currentUser?.uid
+        val user = auth.currentUser?.uid
         val dbHelper = SQLiteHelper(this)
-        val personaje = idUser?.let { dbHelper.obtenerPersonajePorID(it, this) }
-        if (personaje!=null){
-            if (!modificar)
-                startActivity(Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java))
-        }else{
+        val personaje = user?.let { dbHelper.obtenerPersonajePorID(it, this) }
+        if (personaje != null) {
+            if (!modificar){
+                val musica = user.let { dbHelper.obtenerMusicaorID(it, this) }
+                if (musica != 0) {
+                    val intent = Intent(this@CreacionPersonajeActivity, Musica::class.java)
+                    intent.action = Musica.ACTION_START_MUSIC
+                    startService(intent)
+                } else {
+                    val intent = Intent(this@CreacionPersonajeActivity, Musica::class.java)
+                    intent.action = Musica.ACTION_STOP_MUSIC
+                    startService(intent)
+                }
+                startActivity(
+                    Intent(
+                        this@CreacionPersonajeActivity,
+                        PersonajeCreadoActivity::class.java
+                    )
+                )
+            }
+        } else {
             dbHelper.iniciarArticulos()
-            if (idUser != null) {
+            if (user != null) {
                 dbHelper.iniciarPersonajes(this)
             }
         }
@@ -50,7 +67,7 @@ class CreacionPersonajeActivity : BaseActivity() {
 
         val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
         globalButton.setOnClickListener {
-            val intentb = Intent(this,AjustesActivity::class.java)
+            val intentb = Intent(this, AjustesActivity::class.java)
             startActivity(intentb)
         }
 
@@ -63,7 +80,7 @@ class CreacionPersonajeActivity : BaseActivity() {
         boton = findViewById(R.id.botonCrearPersonaje)
         boton.setOnClickListener {
             val valido = (
-                            editTextNombre.text.isNotEmpty() &&
+                    editTextNombre.text.isNotEmpty() &&
                             spinnerRaza.selectedItemId.toInt() != 0 &&
                             spinnerClase.selectedItemId.toInt() != 0 &&
                             spinnerEstadoVital.selectedItemId.toInt() != 0)
@@ -92,7 +109,8 @@ class CreacionPersonajeActivity : BaseActivity() {
                 }
 
                 //val p = Personaje(editTextNombre.text.toString(), raza, clase, estadoVital)
-                val personajeP = PersonajeP(editTextNombre.text.toString(), raza, clase, estadoVital, this)
+                val personajeP =
+                    PersonajeP(editTextNombre.text.toString(), raza, clase, estadoVital, this)
                 if (!modificar)
                     dbHelper.insertarPersonaje(personajeP, auth.currentUser?.uid ?: "")
                 else dbHelper.modificarPersonaje(personajeP, auth.currentUser?.uid ?: "")

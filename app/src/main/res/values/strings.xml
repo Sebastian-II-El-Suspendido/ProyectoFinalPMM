@@ -15,8 +15,7 @@
     <string name="butonAtras">Atrás</string>
     <string name="butonenxt">Continuar</string>
     <string name="quit">Cerrar sesión</string>
-    <string name="mute">Silenciar música</string>
-
+    <string name="mute">Silenciar/Activar música</string>
 
     <!--Text Views activity_main.xml-->
     <string name="TextViewNombre">Nombre</string>

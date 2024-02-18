@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityMainBinding
 import com.example.proyectofinalpmm.musica.Musica
 import com.google.firebase.auth.FirebaseAuth
@@ -41,6 +42,9 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //val dbHelper = SQLiteHelper(this)
+        //dbHelper.borrarBaseDeDatos(this)
 
         // Inicio
         jugar = binding.button

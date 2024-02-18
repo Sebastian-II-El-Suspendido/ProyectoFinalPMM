@@ -7,12 +7,14 @@ import android.os.Binder
 import android.os.IBinder
 import com.example.proyectofinalpmm.R
 
+
 class Musica : Service() {
 
     private lateinit var mediaPlayer: MediaPlayer
     private val binder = MusicBinder()
 
     companion object {
+        const val ACTION_START_MUSIC = "com.example.proyectofinalpmm.START_MUSIC"
         const val ACTION_STOP_MUSIC = "com.example.proyectofinalpmm.STOP_MUSIC"
     }
 
@@ -32,6 +34,7 @@ class Musica : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when(intent?.action) {
+            ACTION_START_MUSIC -> startMusic()
             ACTION_STOP_MUSIC -> stopMusic()
         }
         return START_STICKY
@@ -50,8 +53,10 @@ class Musica : Service() {
     }
 
     fun stopMusic() {
-        mediaPlayer.stop()
-        mediaPlayer.prepareAsync()
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+            mediaPlayer.prepareAsync()
+        }
     }
 
     override fun onDestroy() {

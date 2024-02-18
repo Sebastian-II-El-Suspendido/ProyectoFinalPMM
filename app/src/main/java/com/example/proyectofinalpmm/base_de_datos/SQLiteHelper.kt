@@ -32,6 +32,7 @@ class SQLiteHelper(context: Context) :
         private const val COLUMN_CLASE = "clase"
         private const val COLUMN_ESTADOVITAL = "estado_vital"
         private const val COLUMN_MONEDERO = "monedero"
+        private const val COLUMN_MUSICA = "musica"
 
         // CREAR TABLA MERCADER
         private const val TABLA_MERCADER = "mercader"
@@ -77,7 +78,8 @@ class SQLiteHelper(context: Context) :
                         "$COLUMN_RAZA TEXT," +
                         "$COLUMN_CLASE TEXT," +
                         "$COLUMN_ESTADOVITAL TEXT," +
-                        "$COLUMN_MONEDERO INTEGER)"
+                        "$COLUMN_MONEDERO INTEGER," +
+                        "$COLUMN_MUSICA INTEGER)"
                 )
 
         val createTableMercader = (
@@ -255,6 +257,7 @@ class SQLiteHelper(context: Context) :
             put(COLUMN_RAZA, raza)
             put(COLUMN_CLASE, clase)
             put(COLUMN_ESTADOVITAL, estadoVital)
+            put(COLUMN_MUSICA, 1)
         }
         val idR = db.insert(TABLA_PERSONAJE, null, values)
         db.close()
@@ -326,6 +329,35 @@ class SQLiteHelper(context: Context) :
         db.close()
 
         return personaje
+    }
+
+    @SuppressLint("Range")
+    fun obtenerMusicaorID(id: String, context: Context): Int {
+        val selectQuery = "SELECT * FROM $TABLA_PERSONAJE WHERE $COLUMN_ID_USER = ?"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, arrayOf(id))
+
+        var personaje: PersonajeP? = null
+        var musica = 1
+
+        if (cursor.moveToFirst()) {
+            musica = cursor.getString(cursor.getColumnIndex(COLUMN_MUSICA)).toInt()
+        }
+        cursor.close()
+        db.close()
+
+        return musica
+    }
+
+    fun modificarMusicaPorID(id: String, nuevaMusica: Int) {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put(COLUMN_MUSICA, nuevaMusica)
+        }
+        val whereClause = "$COLUMN_ID_USER = ?"
+        val whereArgs = arrayOf(id)
+        db.update(TABLA_PERSONAJE, contentValues, whereClause, whereArgs)
+        db.close()
     }
 
     fun agregarArticuloPersonaje(idPersonaje: String, idObjeto: Int, cantidad: Int) {
