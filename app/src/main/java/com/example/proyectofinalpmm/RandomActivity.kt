@@ -26,12 +26,18 @@ class RandomActivity : BaseActivity() {
 
         animateText(binding.txtDescripcion,"Comienza la aventura, pulsa el DADO para avanzar. CUIDADO puedes encontrarte enemigos")
 
+        binding.chatBot.setOnClickListener {
+            val intent = Intent(this, ChatBotActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val btnDado = findViewById<Button>(R.id.btnDado)
         btnDado.setOnClickListener {
             RandomActivityFun()
         }
     }
+
 
 
 

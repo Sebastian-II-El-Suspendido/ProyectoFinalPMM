@@ -58,4 +58,7 @@ dependencies {
 
     //Lottie
     implementation ("com.airbnb.android:lottie:3.4.0")
+
+    //Gllide
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.23")
 }

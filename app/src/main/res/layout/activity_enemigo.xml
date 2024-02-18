@@ -4,59 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoenemigo"
     tools:context=".EnemigoActivity">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <View
+        android:id="@+id/black_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-      >
+        android:background="#00000000"
+        android:visibility="gone" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Nivel Enemigo"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
+    <ImageView
+        android:id="@+id/imgEnemigo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="112dp"
+        android:src="@drawable/enemigo1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
 
-        <ImageView
-            android:id="@+id/imgCiudad"
-            android:layout_width="match_parent"
-            android:layout_height="363dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="309dp"
-            />
 
-        <Button
-            android:id="@+id/btnLuchar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="280dp"
-            android:layout_marginBottom="227dp"
-            android:text="Luchar" />
+    <ImageView
+        android:id="@+id/imgEnemigoDragon"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/enemigodragon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/btnHuir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="275dp"
-            android:layout_marginLeft="144dp"
-            android:layout_marginBottom="227dp"
-            android:layout_toRightOf="@id/btnLuchar"
-            android:text="Huir" />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btnLuchar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="236dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Luchar"
+        android:textColor="#404040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
+
+    <Button
+        android:id="@+id/btnHuir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="256dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Huir"
+        android:textColor="#404040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="92dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.67"
+        app:srcCompat="@drawable/guerrero_humano_adulto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

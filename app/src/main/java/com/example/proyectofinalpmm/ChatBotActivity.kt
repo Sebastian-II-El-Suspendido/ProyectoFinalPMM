@@ -1,10 +1,13 @@
 package com.example.proyectofinalpmm
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -13,6 +16,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.proyectofinalpmm.databinding.ActivityChatBotBinding
 import java.util.Locale
 
@@ -23,6 +27,8 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
 
     private lateinit var eleccion: LinearLayout
     private lateinit var chat: RelativeLayout
+
+    private lateinit var random: RandomActivity
 
     private lateinit var humanoImg: ImageView
     private lateinit var elfoImg: ImageView
@@ -46,7 +52,6 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
         textToSpeech = TextToSpeech(this, this)
 
         // Enlazar vistas
-
         eleccion = binding.eleccion
         chat = binding.chat
         eleccion.visibility = View.VISIBLE
@@ -74,7 +79,7 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
 
         elfoImg.setOnClickListener {
             personaje = PersonajeP(
-                "Francisdo el elfo",
+                "Francisca la elfa",
                 PersonajeP.Raza.Elfo,
                 PersonajeP.Clase.entries.random(),
                 PersonajeP.EstadoVital.entries.random(),
@@ -95,6 +100,10 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
             eleccion.visibility = View.GONE
             chat.visibility = View.VISIBLE
         }
+        /*
+
+
+         */
 
         malditoImg.setOnClickListener {
             personaje = PersonajeP(
@@ -120,7 +129,6 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
                 binding.recyclerViewMessages.smoothScrollToPosition(messageList.size - 1)
             }
         }
-
         // Configurar RecyclerView
         messageAdapter = MessageAdapter(messageList)
         binding.recyclerViewMessages.adapter = messageAdapter
@@ -144,6 +152,8 @@ class ChatBotActivity : BaseActivity(), TextToSpeech.OnInitListener {
     }
 }
 
+
+
 class MessageAdapter(private val messageList: List<Mensajes>) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
@@ -164,10 +174,14 @@ class MessageAdapter(private val messageList: List<Mensajes>) :
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textContent: TextView = itemView.findViewById(R.id.textMessageContent)
         private val textSender: TextView = itemView.findViewById(R.id.textMessageSender)
+       // private var animationView: LottieAnimationView = itemView.findViewById(R.id.animationView4)
 
         fun bind(mensaje: Mensajes) {
-            textContent.text = mensaje.content
+            animateText(textContent,mensaje.content)
+            //animationView.playAnimation()
             textSender.text = mensaje.sender
         }
     }
 }
+
+
