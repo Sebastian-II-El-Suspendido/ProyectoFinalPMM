@@ -26,19 +26,9 @@ class AjustesActivity : BaseActivity() {
         }
 
         binding.button7.setOnClickListener {
-            val musica = Intent(this, Musica::class.java)
-            val serviceConnection = object : ServiceConnection {
-                override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                    val binder = service as Musica.MusicBinder
-                    val musicService = binder.getService()
-
-                    // Detener la música
-                    musicService.stopMusic()
-                }
-
-                override fun onServiceDisconnected(name: ComponentName?) {
-                }
-            }
+            val intent = Intent(this@AjustesActivity, Musica::class.java)
+            intent.action = Musica.ACTION_STOP_MUSIC
+            startService(intent)
         }
     }
 }

@@ -50,9 +50,6 @@ class RandomActivity : BaseActivity() {
         }
     }
 
-
-
-
     private fun RandomActivityFun() {
         val actividadAleatoria = Random.nextInt(0..3)
         val animation = binding.animationView3
@@ -61,10 +58,10 @@ class RandomActivity : BaseActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (!animation.isAnimating){
                 val intent = when (actividadAleatoria) {
-                    0 -> Intent(this, ObjetoActivity::class.java)
-                    1 -> Intent(this, CiudadActivity::class.java)
-                    2 -> Intent(this, MercaderActivity::class.java)
-                    else -> Intent(this, EnemigoActivity::class.java)
+                    0 -> Intent(this@RandomActivity, ObjetoActivity::class.java)
+                    1 -> Intent(this@RandomActivity, CiudadActivity::class.java)
+                    2 -> Intent(this@RandomActivity, MercaderActivity::class.java)
+                    else -> Intent(this@RandomActivity, EnemigoActivity::class.java)
                 }
                 startActivity(intent)
             }

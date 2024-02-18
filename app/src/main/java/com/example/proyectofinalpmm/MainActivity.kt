@@ -91,7 +91,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-
         binding.button2.setOnClickListener {
             intent = Intent(this, CreacionPersonajeActivity::class.java)
             startActivity(intent)
@@ -141,7 +140,6 @@ class MainActivity : BaseActivity() {
         toSignUpButton.setOnClickListener {
             registro()
         }
-
     }
 
     private fun registro() {
@@ -167,7 +165,8 @@ class MainActivity : BaseActivity() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             Log.i("aplicacion", "registrado correctamente")
-                            Toast.makeText(this, "Registrado correctamente", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Registrado correctamente", Toast.LENGTH_SHORT)
+                                .show()
                             startActivity(
                                 Intent(
                                     this@MainActivity,

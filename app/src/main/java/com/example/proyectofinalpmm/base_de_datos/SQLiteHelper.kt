@@ -115,7 +115,6 @@ class SQLiteHelper(context: Context) :
                         "FOREIGN KEY($COLUMN_NOMBRE_RESPUESTA) REFERENCES $TABLA_PERSONAJE($COLUMN_ID_USER))"
                 )
 
-
         crearTablas(
             arrayOf(
                 createTableObjetos,
@@ -379,7 +378,7 @@ class SQLiteHelper(context: Context) :
         db.update(TABLA_MERCADER_ARTICULOS, contentValues, whereClause, whereArgs)
     }
 
-    fun insertarArticulo(articulo: Articulos): Long {
+    private fun insertarArticulo(articulo: Articulos): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_NOMBRE_ARTICULO, articulo.getNombre().toString())

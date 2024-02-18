@@ -12,6 +12,10 @@ class Musica : Service() {
     private lateinit var mediaPlayer: MediaPlayer
     private val binder = MusicBinder()
 
+    companion object {
+        const val ACTION_STOP_MUSIC = "com.example.proyectofinalpmm.STOP_MUSIC"
+    }
+
     inner class MusicBinder : Binder() {
         fun getService(): Musica = this@Musica
     }
@@ -24,6 +28,13 @@ class Musica : Service() {
         super.onCreate()
         mediaPlayer = MediaPlayer.create(this, R.raw.relic_song)
         mediaPlayer.isLooping = true
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        when(intent?.action) {
+            ACTION_STOP_MUSIC -> stopMusic()
+        }
+        return START_STICKY
     }
 
     fun startMusic() {
