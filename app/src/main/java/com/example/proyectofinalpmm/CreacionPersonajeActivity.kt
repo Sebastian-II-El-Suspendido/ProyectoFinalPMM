@@ -38,6 +38,7 @@ class CreacionPersonajeActivity : BaseActivity() {
         val user = auth.currentUser?.uid
         val dbHelper = SQLiteHelper(this)
         val personaje = user?.let { dbHelper.obtenerPersonajePorID(it, this) }
+        val mercader = user?.let { dbHelper.obtenerMercaderPorId(it) }
         if (personaje != null) {
             if (!modificar){
                 val musica = user.let { dbHelper.obtenerMusicaorID(it, this) }
@@ -61,6 +62,10 @@ class CreacionPersonajeActivity : BaseActivity() {
             dbHelper.iniciarArticulos()
             if (user != null) {
                 dbHelper.iniciarPersonajes(this)
+                if (mercader == false) {
+                    dbHelper.insertarMercader(user)
+                    dbHelper.meterArticulosMercader(this, user)
+                }
             }
         }
 

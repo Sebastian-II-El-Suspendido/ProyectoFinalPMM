@@ -1,148 +1,209 @@
 package com.example.proyectofinalpmm
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityMercaderBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
-class MercaderActivity : AppCompatActivity() {
+class MercaderActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMercaderBinding
     private lateinit var listaArticulos: List<Articulos>
     private var currentIndex = 0
+
+    private lateinit var btnComerciar: Button
+    private lateinit var btnContinuar: Button
+    private lateinit var btnCancelar: Button
+    private lateinit var btnComprar: Button
+    private lateinit var btnVender: Button
+
+    private lateinit var layoutC : LinearLayout
+    private lateinit var layoutV : LinearLayout
+
+    private lateinit var btnComprarObjeto : Button
+    private lateinit var btnVenderObjeto : Button
+    private lateinit var btnAtrasC : Button
+    private lateinit var btnAtrasV : Button
+
+    private lateinit var imgV : ImageView
+    private lateinit var imgC : ImageView
+
+    private lateinit var nombreC : TextView
+    private lateinit var nombreV : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMercaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val imagenObj = binding.imageView12
-        val mochilote = binding.imageView2
-        val textPeso = binding.textPeso
-        val textNombre = binding.textNombre
-        val textTipo = binding.textTipo
-        val atrasBtn = binding.buttonatras
-        val adelanteBtn = binding.buttonadelante
-        binding.imageView.visibility=View.VISIBLE
-        mochilote.visibility= View.INVISIBLE
-        imagenObj.visibility=View.INVISIBLE
-        textPeso.visibility=View.INVISIBLE
-        textNombre.visibility=View.INVISIBLE
-        textTipo.visibility=View.INVISIBLE
-        atrasBtn.visibility=View.INVISIBLE
-        adelanteBtn.visibility=View.INVISIBLE
 
-        val dbHelper = ObjetosAleatorios(this)
-       // listaArticulos = dbHelper.getArticulos()
-        dbHelper.close()
+        val auth = FirebaseAuth.getInstance()
+        val id = auth.currentUser?.uid
+        val dbHelper = SQLiteHelper(this)
+        var objetosMercader = id?.let { dbHelper.obtenerArticulosDeMercader(it) }
+        var objetoMActual = 0
+        var objetosPersonaje = id?.let { dbHelper.obtenerArticulosDePersonaje(it) }
+        var objetoPActual = 0
 
-        val mochila = intent.getSerializableExtra("mochila") as Mochila
+        btnComerciar = binding.ComerciarBtn
+        btnContinuar = binding.ContinuarBtn
+        btnCancelar = binding.CancelarBtn
+        btnComprar = binding.ComprarBtn
+        btnVender = binding.VenderBtn
 
-        val comerciarBtn = binding.ComerciarBtn
-        val continuarBtn = binding.ContinuarBtn
+        layoutC = binding.linearLayoutComprar
+        layoutV = binding.linearLayoutVender
 
-        val btns = arrayOf(
-            comerciarBtn,
-            continuarBtn
-        )
+        btnAtrasC = binding.button14V
+        btnAtrasV = binding.button14
 
-        val comprarBtn = binding.ComprarBtn
-        val venderBtn = binding.VenderBtn
-        val cancelarBtn = binding.CancelarBtn
+        imgC = binding.imageView12
+        imgV = binding.imageViewV2
 
+        btnVenderObjeto = binding.button13V
+        btnComprarObjeto = binding.button13
 
-        val btns2 = arrayOf(
-            comprarBtn,
-            venderBtn,
-            cancelarBtn,
+        nombreC = binding.textNombre
+        nombreV = binding.textNombreV
 
-            )
+        btnComerciar.visibility = View.VISIBLE
+        btnContinuar.visibility = View.VISIBLE
+        btnCancelar.visibility = View.GONE
+        btnComprar.visibility = View.GONE
+        btnVender.visibility = View.GONE
+        layoutC.visibility = View.GONE
+        layoutV.visibility = View.GONE
 
-        val objscomprar = arrayOf(
-            atrasBtn,
-            adelanteBtn,
-            imagenObj,
-            textPeso,
-            textNombre,
-            textTipo
-        )
-
-        btns2.forEach { it.visibility = View.INVISIBLE }
-
-        comerciarBtn.setOnClickListener {
-            binding.imageView10.visibility= View.VISIBLE
-            binding.imageView.visibility= View.INVISIBLE
-            val articulo = listaArticulos[currentIndex]
-            btns.forEach { it.visibility = View.INVISIBLE }
-            btns2.forEach { it.visibility = View.VISIBLE }
-            var objeto = listaArticulos.random()
-            imagenObj.setImageResource(objeto.getUri())
-            binding.textPeso.text = articulo.getPrecio().toString()
-            binding.textNombre.text = articulo.getNombre().toString()
-            binding.textTipo.text = articulo.getTipoArticulo().toString()
+        btnComerciar.setOnClickListener {
+            btnComerciar.visibility = View.GONE
+            btnContinuar.visibility = View.GONE
+            btnCancelar.visibility = View.VISIBLE
+            btnComprar.visibility = View.VISIBLE
+            btnVender.visibility = View.VISIBLE
         }
 
-        comprarBtn.setOnClickListener {
-            objscomprar.forEach { it.visibility = View.VISIBLE }
-
-
+        btnContinuar.setOnClickListener {
+            startActivity(Intent(this@MercaderActivity, RandomActivity::class.java))
         }
 
-        continuarBtn.setOnClickListener {
-            btns.forEach { it.visibility = View.INVISIBLE }
-            btns2.forEach { it.visibility = View.INVISIBLE }
-            binding.imageView.visibility= View.INVISIBLE
-            binding.textView.visibility=View.INVISIBLE
-            binding.imageView10.visibility=View.INVISIBLE
-            binding.holapedro.visibility=View.VISIBLE
+        btnCancelar.setOnClickListener {
+            btnComerciar.visibility = View.VISIBLE
+            btnContinuar.visibility = View.VISIBLE
+            btnCancelar.visibility = View.GONE
+            btnComprar.visibility = View.GONE
+            btnVender.visibility = View.GONE
         }
 
-        binding.buttonadelante.setOnClickListener {
-            siguiente()
+        btnComprar.setOnClickListener {
+            layoutC.visibility = View.VISIBLE
+            btnCancelar.visibility = View.GONE
+            btnComprar.visibility = View.GONE
+            btnVender.visibility = View.GONE
+            objetosMercader?.let { setUpC(it) }
+            Log.i("hola", objetosMercader.toString())
         }
 
-        binding.buttonatras.setOnClickListener {
-            anterior()
+        btnVender.setOnClickListener {
+            layoutV.visibility = View.VISIBLE
+            btnCancelar.visibility = View.GONE
+            btnComprar.visibility = View.GONE
+            btnVender.visibility = View.GONE
+            objetosPersonaje?.let { setUpV(it) }
         }
 
-        venderBtn.setOnClickListener {
-            mochilote.visibility= View.VISIBLE
-            binding.imageView10.visibility= View.INVISIBLE
-            objscomprar.forEach { it.visibility = View.VISIBLE }
+        btnAtrasC.setOnClickListener {
+            layoutC.visibility = View.GONE
+            btnCancelar.visibility = View.VISIBLE
+            btnComprar.visibility = View.VISIBLE
+            btnVender.visibility = View.VISIBLE
         }
 
+        btnAtrasV.setOnClickListener {
+            layoutV.visibility = View.GONE
+            btnCancelar.visibility = View.VISIBLE
+            btnComprar.visibility = View.VISIBLE
+            btnVender.visibility = View.VISIBLE
+        }
 
-        cancelarBtn.setOnClickListener {
-            btns.forEach { it.visibility = View.VISIBLE }
-            btns2.forEach { it.visibility = View.INVISIBLE }
-            objscomprar.forEach { it.visibility = View.INVISIBLE }
-            binding.imageView10.visibility= View.INVISIBLE
-            binding.imageView2.visibility= View.INVISIBLE
-            binding.imageView.visibility= View.VISIBLE
+        btnComprarObjeto.setOnClickListener {
+            objetosMercader = id?.let { dbHelper.obtenerArticulosDeMercader(it) }
+            objetosPersonaje = id?.let { dbHelper.obtenerArticulosDePersonaje(it) }
+            val idArticulo = dbHelper.obtenerIdArticuloPorNombre(
+                objetosMercader?.get(objetoMActual)?.getNombre().toString())
+            val cantidad = id?.let { it1 -> idArticulo?.let { it2 ->
+                dbHelper.obtenerCantidadArticuloMercader(it1,
+                    it2
+                )
+            } }
+            if (id != null) {
+                if (cantidad != null) {
+                    dbHelper.actualizarArticuloMercader(id, cantidad, cantidad - 1)
+                    if (objetosPersonaje?.contains(objetosMercader?.get(objetoMActual)) == true)
+                        idArticulo?.let { it1 ->
+                            dbHelper.actualizarArticuloPersonaje(id,
+                                it1, cantidad)
+                        }
+                    else idArticulo?.let { it1 -> dbHelper.agregarArticuloPersonaje(id, it1, 1) }
+                    Toast.makeText(this, "articulo comprado - ${
+                        objetosPersonaje?.get(objetoPActual)?.getPrecio()
+                    } coins", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        btnVenderObjeto.setOnClickListener {
+            objetosMercader = id?.let { dbHelper.obtenerArticulosDeMercader(it) }
+            objetosPersonaje = id?.let { dbHelper.obtenerArticulosDePersonaje(it) }
+            val idArticulo = dbHelper.obtenerIdArticuloPorNombre(
+                objetosPersonaje?.get(objetoPActual)?.getNombre().toString())
+            val cantidad = id?.let { it1 -> idArticulo?.let { it2 ->
+                dbHelper.obtenerCantidadArticuloMercader(it1,
+                    it2
+                )
+            } }
+            if (id != null) {
+                if (cantidad != null) {
+                    if (idArticulo != null) {
+                        dbHelper.actualizarArticuloPersonaje(id, idArticulo, cantidad - 1)
+                    }
+                    if (objetosMercader?.contains(objetosPersonaje?.get(objetoPActual)) == true)
+                        idArticulo?.let { it1 ->
+                            dbHelper.actualizarArticuloMercader(id,
+                                it1, cantidad)
+                        }
+                    else idArticulo?.let { it1 -> dbHelper.agregarArticuloMercader(id, it1, 1) }
+                    Toast.makeText(this, "articulo vendido + ${objetosMercader?.get(objetoMActual)
+                        ?.getPrecio()} coins", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }
 
-    private fun mostrarArticuloActual() {
-        val articulo = listaArticulos[currentIndex]
-        binding.imageView12.setImageResource(articulo.getUri())
-        binding.textPeso.text = articulo.getPrecio().toString()
-        binding.textNombre.text = articulo.getNombre().toString()
-        binding.textTipo.text = articulo.getTipoArticulo().toString()
+    fun setUpV(lista : List<Articulos>){
+        if (lista.isEmpty()){
+
+        }else {
+            imgV.setImageResource(lista[0].getUri())
+            nombreV.text = lista[0].getNombre().toString()
+        }
     }
 
-    private fun anterior(){
-        if (currentIndex > 0) {
-            currentIndex--
-            mostrarArticuloActual()
+    fun setUpC(lista : List<Articulos>){
+        if (lista.isEmpty()){
+
+        }else {
+            imgC.setImageResource(lista[0].getUri())
+            nombreC.text = lista[0].getNombre().toString()
         }
-
-    }
-
-    private fun siguiente(){
-        if (currentIndex < listaArticulos.size - 1) {
-            currentIndex++
-            mostrarArticuloActual()
-        }
-
     }
 }

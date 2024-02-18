@@ -14,6 +14,7 @@
         android:layout_marginEnd="15dp"
         android:background="@drawable/bordemarcos"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="Comprar"
+            android:text="Vender"
             android:textColor="#404040"
             android:textSize="20sp" />
 
@@ -144,6 +145,7 @@
         android:layout_marginStart="19dp"
         android:background="@drawable/bordemarcos"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -155,7 +157,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/silk_bold"
             android:gravity="center"
-            android:text="Vender"
+            android:text="Comprar"
             android:textColor="#404040"
             android:textSize="20sp" />
 
@@ -321,9 +323,9 @@
         android:backgroundTint="#6B8096"
         android:fontFamily="@font/silk_bold"
         android:gravity="center"
-        android:textColor="#404040"
-        android:visibility="gone"
         android:text="Comerciar"
+        android:textColor="#404040"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -336,7 +338,7 @@
         android:gravity="center"
         android:text="Continuar"
         android:textColor="#404040"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBaseline_toBaselineOf="@+id/ComerciarBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ComerciarBtn" />

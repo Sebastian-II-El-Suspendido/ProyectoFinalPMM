@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.proyectofinalpmm.Articulos
 import com.example.proyectofinalpmm.PersonajeP
+import com.example.proyectofinalpmm.R
 import java.util.UUID
 
 class SQLiteHelper(context: Context) :
@@ -145,20 +146,29 @@ class SQLiteHelper(context: Context) :
 
         if (count == 0) {
             val listaArticulos = arrayListOf(
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, 1),
-                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 10, 15, 1),
-                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, 1),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.GRIMORIO, 10, 10, 1),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.HUEVO, 15, 20, 1),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, 1),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.PERGAMINOS, 5, 5, 1),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.POCION, 5, 15, 1),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.RUNAS, 5, 15, 1),
-                Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, 1)
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, R.drawable.amuleto),
+                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 10, 15, R.drawable.baston),
+                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, R.drawable.daga),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.GRIMORIO, 10, 10, R.drawable.grimorio),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.HUEVO, 15, 20, R.drawable.huevo),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, R.drawable.mapa),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.PERGAMINOS, 5, 5, R.drawable.pergaminos),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.POCION, 5, 15, R.drawable.pocion),
+                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.RUNAS, 5, 15, R.drawable.runas),
+                Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, R.drawable.moneda)
             )
 
             listaArticulos.forEach { insertarArticulo(it) }
         }
+    }
+
+    fun meterArticulosMercader(context: Context, idMercader: String){
+        val dbHelper = SQLiteHelper(context)
+        val listaArticulos = obtenerListaArticulos()
+        listaArticulos.forEach { obtenerIdArticuloPorNombre(it.getNombre().toString())?.let { it1 ->
+            dbHelper.agregarArticuloMercader(idMercader,
+                it1, (0..20).random())
+        } }
     }
 
     fun iniciarPersonajes(context: Context) {
@@ -336,8 +346,6 @@ class SQLiteHelper(context: Context) :
         val selectQuery = "SELECT * FROM $TABLA_PERSONAJE WHERE $COLUMN_ID_USER = ?"
         val db = this.readableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(id))
-
-        var personaje: PersonajeP? = null
         var musica = 1
 
         if (cursor.moveToFirst()) {
@@ -370,15 +378,72 @@ class SQLiteHelper(context: Context) :
         db?.insert(TABLA_PERSONAJE_ARTICULOS, null, contentValues)
     }
 
+    @SuppressLint("Range")
+    fun obtenerArticulosDePersonaje(idPersonaje: String): List<Articulos> {
+        val listaArticulos = mutableListOf<Articulos>()
+
+        val selectQuery = "SELECT * FROM $TABLA_PERSONAJE_ARTICULOS WHERE $COLUMN_ID_PERSONAJE_REL = ?"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, arrayOf(idPersonaje))
+
+        while (cursor.moveToNext()) {
+            val idArticulo = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_OBJETO_REL_OP))
+            val articulo = buscarArticuloPorId(idArticulo)
+            articulo?.let {
+                listaArticulos.add(it)
+            }
+        }
+
+        cursor.close()
+        db.close()
+
+        return listaArticulos
+    }
     fun actualizarArticuloPersonaje(idPersonaje: String, idObjeto: Int, nuevaCantidad: Int) {
         val db = this.writableDatabase
-        val contentValues = ContentValues().apply {
-            put(COLUMN_CANTIDAD_OP, nuevaCantidad)
-        }
-        val whereClause =
-            "$COLUMN_ID_PERSONAJE_REL = $idPersonaje AND $COLUMN_ID_OBJETO_REL_OP = $idObjeto"
+        val whereClause = "$COLUMN_ID_PERSONAJE_REL = ? AND $COLUMN_ID_OBJETO_REL_OP = ?"
         val whereArgs = arrayOf(idPersonaje, idObjeto.toString())
-        db.update(TABLA_PERSONAJE_ARTICULOS, contentValues, whereClause, whereArgs)
+
+        if (nuevaCantidad <= 0) {
+            db.delete(TABLA_PERSONAJE_ARTICULOS, whereClause, whereArgs)
+        } else {
+            val contentValues = ContentValues().apply {
+                put(COLUMN_CANTIDAD_OP, nuevaCantidad)
+            }
+            db.update(TABLA_PERSONAJE_ARTICULOS, contentValues, whereClause, whereArgs)
+        }
+    }
+
+    @SuppressLint("Range")
+    fun obtenerCantidadArticuloPersonaje(idPersonaje: String, idObjeto: Int): Int {
+        val db = this.readableDatabase
+        val selectQuery = "SELECT $COLUMN_CANTIDAD_OP FROM $TABLA_PERSONAJE_ARTICULOS WHERE $COLUMN_ID_PERSONAJE_REL = ? AND $COLUMN_ID_OBJETO_REL_OP = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(idPersonaje, idObjeto.toString()))
+
+        var cantidad = 0
+        if (cursor.moveToFirst()) {
+            cantidad = cursor.getInt(cursor.getColumnIndex(COLUMN_CANTIDAD_OP))
+        }
+        cursor.close()
+        db.close()
+
+        return cantidad
+    }
+
+    @SuppressLint("Range")
+    fun obtenerCantidadArticuloMercader(idMercader: String, idObjeto: Int): Int {
+        val db = this.readableDatabase
+        val selectQuery = "SELECT $COLUMN_CANTIDAD_OM FROM $TABLA_MERCADER_ARTICULOS WHERE $COLUMN_ID_MERCADER_REL = ? AND $COLUMN_ID_OBJETO_REL_OM = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(idMercader, idObjeto.toString()))
+
+        var cantidad = 0
+        if (cursor.moveToFirst()) {
+            cantidad = cursor.getInt(cursor.getColumnIndex(COLUMN_CANTIDAD_OM))
+        }
+        cursor.close()
+        db.close()
+
+        return cantidad
     }
 
     fun insertarMercader(id: String) {
@@ -387,6 +452,21 @@ class SQLiteHelper(context: Context) :
             put(COLUMN_ID_MERCADER, id)
         }
         db.insert(TABLA_MERCADER, null, values)
+    }
+
+    @SuppressLint("Range")
+    fun obtenerMercaderPorId(idMercader: String): Boolean {
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM $TABLA_MERCADER WHERE $COLUMN_ID_MERCADER = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(idMercader))
+        var mercaderEncontrado = false
+
+        cursor.use {
+            if (cursor.moveToFirst()) {
+                mercaderEncontrado = true
+            }
+        }
+        return mercaderEncontrado
     }
 
     fun agregarArticuloMercader(idMercader: String, idObjeto: Int, cantidad: Int) {
@@ -399,15 +479,39 @@ class SQLiteHelper(context: Context) :
         db?.insert(TABLA_MERCADER_ARTICULOS, null, contentValues)
     }
 
+    @SuppressLint("Range")
+    fun obtenerArticulosDeMercader(idMercader: String): List<Articulos> {
+        val listaArticulos = mutableListOf<Articulos>()
+
+        val selectQuery = "SELECT * FROM $TABLA_MERCADER_ARTICULOS WHERE $COLUMN_ID_MERCADER_REL = ?"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, arrayOf(idMercader))
+
+        while (cursor.moveToNext()) {
+            val idArticulo = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_OBJETO_REL_OM))
+            val articulo = buscarArticuloPorNombre(idArticulo.toString())
+            articulo?.let { listaArticulos.add(it) }
+        }
+
+        cursor.close()
+        db.close()
+
+        return listaArticulos
+    }
+
     fun actualizarArticuloMercader(idMercader: String, idObjeto: Int, nuevaCantidad: Int) {
         val db = this.writableDatabase
-        val contentValues = ContentValues().apply {
-            put(COLUMN_CANTIDAD_OM, nuevaCantidad)
+        val whereClause = "$COLUMN_ID_MERCADER_REL = ? AND $COLUMN_ID_OBJETO_REL_OM = ?"
+        val whereArgs = arrayOf(idMercader, idObjeto.toString())
+
+        if (nuevaCantidad <= 0) {
+            db.delete(TABLA_MERCADER_ARTICULOS, whereClause, whereArgs)
+        } else {
+            val contentValues = ContentValues().apply {
+                put(COLUMN_CANTIDAD_OM, nuevaCantidad)
+            }
+            db.update(TABLA_MERCADER_ARTICULOS, contentValues, whereClause, whereArgs)
         }
-        val whereClause =
-            "$COLUMN_ID_MERCADER_REL = $idMercader AND $COLUMN_ID_OBJETO_REL_OM = $idObjeto"
-        val whereArgs = arrayOf(idMercader.toString(), idObjeto.toString())
-        db.update(TABLA_MERCADER_ARTICULOS, contentValues, whereClause, whereArgs)
     }
 
     private fun insertarArticulo(articulo: Articulos): Long {
@@ -425,11 +529,11 @@ class SQLiteHelper(context: Context) :
     }
 
     @SuppressLint("Range")
-    fun buscarArticuloPorNombre(nombreArticulo: Articulos.Nombre): Articulos? {
+    fun buscarArticuloPorNombre(nombreArticulo: String): Articulos? {
         val db = this.readableDatabase
         val selectQuery =
             "SELECT * FROM $TABLA_OBJETOS WHERE $COLUMN_NOMBRE_ARTICULO = ?"
-        val cursor = db.rawQuery(selectQuery, arrayOf(nombreArticulo.name))
+        val cursor = db.rawQuery(selectQuery, arrayOf(nombreArticulo))
 
         var articulo: Articulos? = null
 
@@ -446,7 +550,60 @@ class SQLiteHelper(context: Context) :
                 else -> Articulos.TipoArticulo.OBJETO
             }
 
-            articulo = Articulos(tipoArticulo, nombreArticulo, peso, precio, uri)
+            val nombreArticuloEnum = Articulos.Nombre.valueOf(nombreArticulo) // Convertir cadena a enum
+
+            articulo = Articulos(tipoArticulo, nombreArticuloEnum, peso, precio, uri)
+        }
+        cursor.close()
+        db.close()
+
+        return articulo
+    }
+
+    @SuppressLint("Range")
+    fun obtenerIdArticuloPorNombre(nombreArticulo: String): Int? {
+        val db = this.readableDatabase
+        val selectQuery =
+            "SELECT $COLUMN_ID_OBJETO FROM $TABLA_OBJETOS WHERE $COLUMN_NOMBRE_ARTICULO = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(nombreArticulo))
+
+        var idArticulo: Int? = null
+
+        if (cursor.moveToFirst()) {
+            idArticulo = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_OBJETO))
+        }
+        cursor.close()
+        db.close()
+
+        return idArticulo
+    }
+
+    @SuppressLint("Range")
+    fun buscarArticuloPorId(idArticulo: Int): Articulos? {
+        val db = this.readableDatabase
+        val selectQuery =
+            "SELECT * FROM $TABLA_OBJETOS WHERE $COLUMN_ID_OBJETO = ?"
+        val cursor = db.rawQuery(selectQuery, arrayOf(idArticulo.toString()))
+
+        var articulo: Articulos? = null
+
+        if (cursor.moveToFirst()) {
+            val tipoArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_TIPO_ARTICULO))
+            val nombreArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
+            val peso = cursor.getInt(cursor.getColumnIndex(COLUMN_PESO))
+            val precio = cursor.getInt(cursor.getColumnIndex(COLUMN_PRECIO))
+            val uri = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_IMAGEN))
+
+            val tipoArticulo = when (tipoArticuloString) {
+                "ARMA" -> Articulos.TipoArticulo.ARMA
+                "OBJETO" -> Articulos.TipoArticulo.OBJETO
+                "ORO" -> Articulos.TipoArticulo.ORO
+                else -> Articulos.TipoArticulo.OBJETO
+            }
+
+            val nombreArticuloEnum = Articulos.Nombre.valueOf(nombreArticuloString) // Convertir cadena a enum
+
+            articulo = Articulos(tipoArticulo, nombreArticuloEnum, peso, precio, uri)
         }
         cursor.close()
         db.close()
