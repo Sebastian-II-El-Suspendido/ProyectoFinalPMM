@@ -31,12 +31,15 @@ class CreacionPersonajeActivity : BaseActivity() {
         setContentView(binding.root)
         setupSpinner()
 
+        val modificar = intent.getBooleanExtra("modificar", false)
+
         val auth = FirebaseAuth.getInstance()
         val idUser = auth.currentUser?.uid
         val dbHelper = SQLiteHelper(this)
         val personaje = idUser?.let { dbHelper.obtenerPersonajePorID(it, this) }
         if (personaje!=null){
-            startActivity(Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java))
+            if (!modificar)
+                startActivity(Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java))
         }else{
             dbHelper.iniciarArticulos()
         }
@@ -80,7 +83,9 @@ class CreacionPersonajeActivity : BaseActivity() {
 
                 //val p = Personaje(editTextNombre.text.toString(), raza, clase, estadoVital)
                 val personajeP = PersonajeP(editTextNombre.text.toString(), raza, clase, estadoVital, this)
-                dbHelper.insertarPersonaje(personajeP, auth.currentUser?.uid ?: "")
+                if (!modificar)
+                    dbHelper.insertarPersonaje(personajeP, auth.currentUser?.uid ?: "")
+                else dbHelper.modificarPersonaje(personajeP, auth.currentUser?.uid ?: "")
                 intent = Intent(this@CreacionPersonajeActivity, PersonajeCreadoActivity::class.java)
                 startActivity(intent)
             } else {

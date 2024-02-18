@@ -179,11 +179,34 @@ class SQLiteHelper(context: Context) :
         return idR
     }
 
+    fun modificarPersonaje(personajeP: PersonajeP, id: String): Int {
+        val db = this.writableDatabase
+        val nombre = personajeP.getNombre()
+        val raza = personajeP.getRaza().toString()
+        val clase = personajeP.getClase().toString()
+        val estadoVital = personajeP.getEstadoVital().toString()
+
+        val values = ContentValues().apply {
+            put(COLUMN_NOMBRE_PERSONAJE, nombre)
+            put(COLUMN_RAZA, raza)
+            put(COLUMN_CLASE, clase)
+            put(COLUMN_ESTADOVITAL, estadoVital)
+        }
+
+        val whereClause = "$COLUMN_ID_USER = ?"
+        val whereArgs = arrayOf(id)
+
+        val rowCount = db.update(TABLA_PERSONAJE, values, whereClause, whereArgs)
+        db.close()
+
+        return rowCount
+    }
+
     @SuppressLint("Range")
     fun obtenerPersonajePorID(id: String, context: Context): PersonajeP? {
         val selectQuery = "SELECT * FROM $TABLA_PERSONAJE WHERE $COLUMN_ID_USER = ?"
         val db = this.readableDatabase
-        val cursor = db.rawQuery(selectQuery, arrayOf(id.toString()))
+        val cursor = db.rawQuery(selectQuery, arrayOf(id))
 
         var personaje: PersonajeP? = null
 

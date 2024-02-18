@@ -44,6 +44,7 @@ class PersonajeCreadoActivity : BaseActivity() {
 
         binding.button5.setOnClickListener {
             val intent = Intent(this, CreacionPersonajeActivity::class.java)
+            intent.putExtra("modificar", true)
             startActivity(intent)
         }
 
