@@ -90,26 +90,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.884" />
 
-    <HorizontalScrollView
+
+    <LinearLayout
         android:id="@+id/ScrollComprar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bordemarcos"
-        android:paddingStart="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="0dp"
-        android:visibility="visible"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.565">
+        <include
+            layout="@layout/recyclerciudades"/>
+    </LinearLayout>
 
-            <include layout="@layout/recyclerciudades"/>
 
-    </HorizontalScrollView>
+
 
     <include
         layout="@layout/ajustes"/>
