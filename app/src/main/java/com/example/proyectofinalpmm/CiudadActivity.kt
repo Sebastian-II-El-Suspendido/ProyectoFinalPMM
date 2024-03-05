@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectofinalpmm.databinding.ActivityCiudadBinding
 
 class CiudadActivity : BaseActivity() {
@@ -13,20 +16,63 @@ class CiudadActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCiudadBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val btnRecoger = findViewById<Button>(R.id.btnEntrar)
-        val btnContinuarObjeto = findViewById<Button>(R.id.btnContinuarCiudad)
+        val btnEntrar = findViewById<Button>(R.id.btnEntrar)
+        val btnContinuarCiudad = findViewById<Button>(R.id.btnContinuarCiudad)
         binding.ScrollComprar.visibility = View.GONE
         binding.btnEntrar2.visibility= View.GONE
 
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this,AjustesActivity::class.java)
+            startActivity(intentb)
+        }
+
+        val ciudadesList = listOf(
+            R.drawable.casa1,
+            R.drawable.casa2,
+            R.drawable.casa3,
+            R.drawable.casa4,
+            R.drawable.casa5,
+            R.drawable.casa6,
+            R.drawable.casa7,
+            R.drawable.casa8,
+            R.drawable.casa9,
+            R.drawable.casa10,
+            R.drawable.casa11,
+            R.drawable.casa12,
+        )
+
+        val zonasList = listOf(
+            "Distrito de las Mil Fuentes",
+            "Barrio de los Sueños Encantados",
+            "Plaza del Dragón Dorado",
+            "Callejón de las Sombras Veladas",
+            "Sector de las Maravillas Arcanas",
+            "Avenida de los Secretos Antiguos",
+            "Zona de las Estrellas Errantes",
+            "Pasaje de la Luna Plateada",
+            "Barriada de Luna Plateada",
+            "Calle de los Misterios Olvidados",
+            "Sector de las Mariposas de Cristal",
+            "Área de la Aurora Brillante"
+        )
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerCity)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = layoutManager
+
+
+        val adapter = ImageAdapter(this, ciudadesList, zonasList)
+        recyclerView.adapter = adapter
 
         animateText(binding.textView,"Entras a la ciudad (Espero que con los bolsillos bien cargados de oro) con la necesidad de adquirir una nueva propiedad donde poder descansar de tus aventuras. Se te presentan distintas propiedas que puedes comprar")
 
-        btnRecoger.setOnClickListener {
+        btnEntrar.setOnClickListener {
             val intent = Intent(this,MercaderActivity::class.java)
             startActivity(intent)
         }
 
-        btnContinuarObjeto.setOnClickListener {
+        btnContinuarCiudad.setOnClickListener {
             binding.textView.visibility=View.GONE
             binding.ScrollComprar.visibility=View.VISIBLE
             binding.btnEntrar.visibility=View.GONE

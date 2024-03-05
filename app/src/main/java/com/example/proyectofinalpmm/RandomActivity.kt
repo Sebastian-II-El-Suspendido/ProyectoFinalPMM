@@ -41,6 +41,14 @@ class RandomActivity : BaseActivity() {
             val intent = Intent(this, MercaderActivity::class.java)
             startActivity(intent)
         }
+        binding.button10.setOnClickListener{
+            val intent = Intent(this, CiudadActivity::class.java)
+            startActivity(intent)
+        }
+        binding.button11.setOnClickListener {
+            val intent = Intent(this, ObjetoActivity::class.java)
+            startActivity(intent)
+        }
 
 
         val globalButton = findViewById<ImageView>(R.id.ajustesBoton)

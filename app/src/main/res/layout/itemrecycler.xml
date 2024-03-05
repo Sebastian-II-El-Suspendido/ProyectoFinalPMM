@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textViewCasa"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:fontFamily="@font/silk_bold"
+            android:gravity="center"
+            android:text="Distrito de las Mil Fuentes"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/imageViewCasa"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:src="@drawable/casa1" />
+    </LinearLayout>
+
