@@ -4,6 +4,7 @@ package com.example.proyectofinalpmm
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -39,8 +40,9 @@ class CreacionPersonajeActivity : BaseActivity() {
         val dbHelper = SQLiteHelper(this)
         val personaje = user?.let { dbHelper.obtenerPersonajePorID(it, this) }
         val mercader = user?.let { dbHelper.obtenerMercaderPorId(it) }
+        Log.i("ayuda", mercader.toString())
         if (personaje != null) {
-            if (!modificar){
+            if (!modificar) {
                 val musica = user.let { dbHelper.obtenerMusicaorID(it, this) }
                 if (musica != 0) {
                     val intent = Intent(this@CreacionPersonajeActivity, Musica::class.java)
@@ -60,12 +62,10 @@ class CreacionPersonajeActivity : BaseActivity() {
             }
         } else {
             dbHelper.iniciarArticulos()
-            if (user != null) {
-                dbHelper.iniciarPersonajes(this)
-                if (mercader == false) {
-                    dbHelper.insertarMercader(user)
-                    dbHelper.meterArticulosMercader(this, user)
-                }
+            dbHelper.iniciarPersonajes(this)
+            if (mercader == false) {
+                dbHelper.insertarMercader(user)
+                dbHelper.meterArticulosMercader(this, user)
             }
         }
 
@@ -113,7 +113,6 @@ class CreacionPersonajeActivity : BaseActivity() {
                     else -> PersonajeP.EstadoVital.Anciano
                 }
 
-                //val p = Personaje(editTextNombre.text.toString(), raza, clase, estadoVital)
                 val personajeP =
                     PersonajeP(editTextNombre.text.toString(), raza, clase, estadoVital, this)
                 if (!modificar)
@@ -129,12 +128,10 @@ class CreacionPersonajeActivity : BaseActivity() {
                 ).show()
             }
 
-
             binding.button3.setOnClickListener {
                 val intent2 = Intent(this, PersonajeCreadoActivity::class.java)
                 startActivity(intent2)
             }
-
 
         }
 
