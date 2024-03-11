@@ -94,9 +94,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/guerrero_humano_adulto"
+        android:background="@drawable/personajesinselect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"

@@ -8,9 +8,110 @@
     tools:context=".MercaderActivity">
 
     <LinearLayout
+        android:id="@+id/mercader2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bordemarcos"
+            android:fontFamily="@font/silk_bold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Espero que tengas preparado el oro para los excluisivos articulos que te voy a mostrar."
+            android:textColor="#404040"
+            android:textSize="12sp" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="410dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mercader2" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/chatanimation2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.127"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mercader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="410dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mercader" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/GifChat"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/chatanimation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.909"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bordemarcos"
+            android:fontFamily="@font/silk_bold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Muestrame que tienes, pero no esperes que pague demasiado por los desechos que me traes que llamas articulos."
+            android:textColor="#404040"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayoutVender"
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/bordemarcos"
         android:orientation="vertical"
@@ -25,9 +126,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/silk_bold"
             android:gravity="center"
+            android:paddingTop="10dp"
             android:text="Vender"
             android:textColor="#404040"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/imageView12"
@@ -44,18 +146,17 @@
 
             <ImageView
                 android:id="@+id/buttonatras"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="30dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginEnd="80dp"
                 android:src="@drawable/flecha_atra" />
 
             <ImageView
                 android:id="@+id/buttonadelante"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/flecha_adelante" />
-
 
 
         </LinearLayout>
@@ -114,20 +215,20 @@
                 android:id="@+id/button13"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="30dp"
                 android:backgroundTint="#6B8096"
                 android:fontFamily="@font/silk_bold"
                 android:text="Comprar Objeto"
                 android:textColor="#404040"
-                android:layout_marginEnd="30dp"
-                android:layout_gravity="center"
                 android:textSize="8sp" />
 
             <Button
                 android:id="@+id/button14"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#6B8096"
                 android:layout_gravity="center"
+                android:backgroundTint="#6B8096"
                 android:fontFamily="@font/silk_bold"
                 android:text="@string/butonAtras"
                 android:textColor="#404040"
@@ -141,11 +242,11 @@
     <LinearLayout
         android:id="@+id/linearLayoutComprar"
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:layout_marginStart="19dp"
         android:background="@drawable/bordemarcos"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -157,9 +258,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/silk_bold"
             android:gravity="center"
+            android:paddingTop="10dp"
             android:text="Comprar"
             android:textColor="#404040"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/imageViewV2"
@@ -176,16 +278,16 @@
 
             <ImageView
                 android:id="@+id/buttonatrasV"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="30dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginEnd="80dp"
                 android:src="@drawable/flecha_atra" />
 
             <ImageView
                 android:id="@+id/buttonadelanteV"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/flecha_adelante" />
 
 
@@ -325,7 +427,7 @@
         android:gravity="center"
         android:text="Comerciar"
         android:textColor="#404040"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -338,7 +440,7 @@
         android:gravity="center"
         android:text="Continuar"
         android:textColor="#404040"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/ComerciarBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ComerciarBtn" />

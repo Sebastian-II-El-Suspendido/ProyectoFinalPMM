@@ -101,19 +101,13 @@ fun animateText(textView: TextView, text: String) {
     val handler = Handler(Looper.getMainLooper())
     val runnable = object : Runnable {
         var index = 0
-
         override fun run() {
-            // Agrega el siguiente carácter al TextView
             textView.text = text.substring(0, index++)
-
             if (index <= text.length) {
-                // Posterga la ejecución del mismo bloque con un delay para el siguiente carácter
-                handler.postDelayed(this, 150) // 150ms de delay para cada carácter
+                handler.postDelayed(this, 150)
             }
         }
     }
-
-    // Inicia el proceso
     handler.post(runnable)
 }
 

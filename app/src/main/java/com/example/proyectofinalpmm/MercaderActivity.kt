@@ -29,6 +29,8 @@ class MercaderActivity : BaseActivity() {
 
     private lateinit var layoutC : LinearLayout
     private lateinit var layoutV : LinearLayout
+    private lateinit var layoutM : LinearLayout
+    private lateinit var layoutM2: LinearLayout
 
     private lateinit var btnComprarObjeto : Button
     private lateinit var btnVenderObjeto : Button
@@ -62,6 +64,8 @@ class MercaderActivity : BaseActivity() {
 
         layoutC = binding.linearLayoutComprar
         layoutV = binding.linearLayoutVender
+        layoutM = binding.mercader
+        layoutM2 = binding.mercader2
 
         btnAtrasC = binding.button14V
         btnAtrasV = binding.button14
@@ -81,6 +85,8 @@ class MercaderActivity : BaseActivity() {
         btnComprar.visibility = View.GONE
         btnVender.visibility = View.GONE
         layoutC.visibility = View.GONE
+        layoutM.visibility= View.GONE
+        layoutM2.visibility= View.GONE
         layoutV.visibility = View.GONE
 
         btnComerciar.setOnClickListener {
@@ -105,6 +111,8 @@ class MercaderActivity : BaseActivity() {
 
         btnComprar.setOnClickListener {
             layoutC.visibility = View.VISIBLE
+            layoutM2.visibility = View.VISIBLE
+            animateText(binding.textView15,"Espero que tengas preparado el oro para los excluisivos articulos que te voy a mostrar.")
             btnCancelar.visibility = View.GONE
             btnComprar.visibility = View.GONE
             btnVender.visibility = View.GONE
@@ -114,6 +122,8 @@ class MercaderActivity : BaseActivity() {
 
         btnVender.setOnClickListener {
             layoutV.visibility = View.VISIBLE
+            layoutM.visibility= View.VISIBLE
+            animateText(binding.textView14,"Muestrame que tienes, pero no esperes que pague demasiado por los desechos que me traes que llamas articulos.")
             btnCancelar.visibility = View.GONE
             btnComprar.visibility = View.GONE
             btnVender.visibility = View.GONE
@@ -122,6 +132,7 @@ class MercaderActivity : BaseActivity() {
 
         btnAtrasC.setOnClickListener {
             layoutC.visibility = View.GONE
+            layoutM2.visibility = View.GONE
             btnCancelar.visibility = View.VISIBLE
             btnComprar.visibility = View.VISIBLE
             btnVender.visibility = View.VISIBLE
@@ -129,6 +140,7 @@ class MercaderActivity : BaseActivity() {
 
         btnAtrasV.setOnClickListener {
             layoutV.visibility = View.GONE
+            layoutM.visibility= View.GONE
             btnCancelar.visibility = View.VISIBLE
             btnComprar.visibility = View.VISIBLE
             btnVender.visibility = View.VISIBLE
