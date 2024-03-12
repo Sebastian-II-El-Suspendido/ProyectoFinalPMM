@@ -23,36 +23,42 @@ class MercaderActivity : BaseActivity() {
     private lateinit var btnComprar: Button
     private lateinit var btnVender: Button
 
-    private lateinit var layoutC : LinearLayout
-    private lateinit var layoutV : LinearLayout
-    private lateinit var layoutM : LinearLayout
+    private lateinit var layoutC: LinearLayout
+    private lateinit var layoutV: LinearLayout
+    private lateinit var layoutM: LinearLayout
     private lateinit var layoutM2: LinearLayout
 
-    private lateinit var btnComprarObjeto : Button
-    private lateinit var btnVenderObjeto : Button
-    private lateinit var btnAtrasC : Button
-    private lateinit var btnAtrasV : Button
+    private lateinit var btnComprarObjeto: Button
+    private lateinit var btnVenderObjeto: Button
+    private lateinit var btnAtrasC: Button
+    private lateinit var btnAtrasV: Button
 
-    private lateinit var imgV : ImageView
-    private lateinit var imgC : ImageView
+    private lateinit var imgV: ImageView
+    private lateinit var imgC: ImageView
 
-    private lateinit var nombreC : TextView
-    private lateinit var pesoC : TextView
-    private lateinit var precioC : TextView
-    private lateinit var nombreV : TextView
-    private lateinit var pesoV : TextView
-    private lateinit var precioV : TextView
+    private lateinit var nombreC: TextView
+    private lateinit var pesoC: TextView
+    private lateinit var precioC: TextView
+    private lateinit var nombreV: TextView
+    private lateinit var pesoV: TextView
+    private lateinit var precioV: TextView
 
-    private lateinit var btnAdelanteItemC : ImageView
-    private lateinit var btnAtrasItemC : ImageView
+    private lateinit var btnAdelanteItemC: ImageView
+    private lateinit var btnAtrasItemC: ImageView
 
-    private lateinit var btnAdelanteItemV : ImageView
-    private lateinit var btnAtrasItemV : ImageView
+    private lateinit var btnAdelanteItemV: ImageView
+    private lateinit var btnAtrasItemV: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMercaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
+        globalButton.setOnClickListener {
+            val intentb = Intent(this, AjustesActivity::class.java)
+            startActivity(intentb)
+        }
 
         val auth = FirebaseAuth.getInstance()
         val id = auth.currentUser?.uid
@@ -82,8 +88,8 @@ class MercaderActivity : BaseActivity() {
         imgC = binding.imageViewV2
         imgV = binding.imageView12
 
-        btnVenderObjeto = binding.button13V
-        btnComprarObjeto = binding.button13
+        btnVenderObjeto = binding.button13
+        btnComprarObjeto = binding.button13V
 
         nombreV = binding.textNombre
         pesoV = binding.textPeso
@@ -104,8 +110,8 @@ class MercaderActivity : BaseActivity() {
         btnComprar.visibility = View.GONE
         btnVender.visibility = View.GONE
         layoutC.visibility = View.GONE
-        layoutM.visibility= View.GONE
-        layoutM2.visibility= View.GONE
+        layoutM.visibility = View.GONE
+        layoutM2.visibility = View.GONE
         layoutV.visibility = View.GONE
 
         btnComerciar.setOnClickListener {
@@ -131,7 +137,10 @@ class MercaderActivity : BaseActivity() {
         btnComprar.setOnClickListener {
             layoutC.visibility = View.VISIBLE
             layoutM2.visibility = View.VISIBLE
-            animateText(binding.textView15,"Espero que tengas preparado el oro para los excluisivos articulos que te voy a mostrar.")
+            animateText(
+                binding.textView15,
+                "Espero que tengas preparado el oro para los excluisivos articulos que te voy a mostrar."
+            )
             btnCancelar.visibility = View.GONE
             btnComprar.visibility = View.GONE
             btnVender.visibility = View.GONE
@@ -141,8 +150,11 @@ class MercaderActivity : BaseActivity() {
 
         btnVender.setOnClickListener {
             layoutV.visibility = View.VISIBLE
-            layoutM.visibility= View.VISIBLE
-            animateText(binding.textView14,"Muestrame que tienes, pero no esperes que pague demasiado por los desechos que me traes que llamas articulos.")
+            layoutM.visibility = View.VISIBLE
+            animateText(
+                binding.textView14,
+                "Muestrame que tienes, pero no esperes que pague demasiado por los desechos que me traes que llamas articulos."
+            )
             btnCancelar.visibility = View.GONE
             btnComprar.visibility = View.GONE
             btnVender.visibility = View.GONE
@@ -159,7 +171,7 @@ class MercaderActivity : BaseActivity() {
 
         btnAtrasV.setOnClickListener {
             layoutV.visibility = View.GONE
-            layoutM.visibility= View.GONE
+            layoutM.visibility = View.GONE
             btnCancelar.visibility = View.VISIBLE
             btnComprar.visibility = View.VISIBLE
             btnVender.visibility = View.VISIBLE
@@ -169,58 +181,84 @@ class MercaderActivity : BaseActivity() {
             objetosMercader = id?.let { dbHelper.obtenerArticulosDeMercader(it) }
             objetosPersonaje = id?.let { dbHelper.obtenerArticulosDePersonaje(it) }
             val idArticulo = dbHelper.obtenerIdArticuloPorNombre(
-                objetosMercader?.get(objetoMActual)?.getNombre().toString())
-            val cantidad = id?.let { it1 -> idArticulo?.let { it2 ->
-                dbHelper.obtenerCantidadArticuloMercader(it1,
-                    it2
-                )
-            } }
-            if (id != null) {
-                if (cantidad != null) {
-                    dbHelper.actualizarArticuloMercader(id, cantidad, cantidad - 1)
-                    if (objetosPersonaje?.contains(objetosMercader?.get(objetoMActual)) == true)
-                        idArticulo?.let { it1 ->
-                            dbHelper.actualizarArticuloPersonaje(id,
-                                it1, cantidad)
-                        }
-                    else idArticulo?.let { it1 -> dbHelper.agregarArticuloPersonaje(id, it1, 1) }
-                    Toast.makeText(this, "articulo comprado - ${
-                        objetosPersonaje?.get(objetoPActual)?.getPrecio()
-                    } coins", Toast.LENGTH_SHORT).show()
-                }
-            }
+                objetosMercader?.get(objetoMActual)?.getNombre().toString()
+            )
+            val cantidadP = dbHelper.obtenerCantidadArticuloPersonaje(id, idArticulo)
+            val cantidadM = dbHelper.obtenerCantidadArticuloMercader(id, idArticulo)
+            val peso = dbHelper.obtenerPesoTotalPersonaje(id, objetosPersonaje)
+            val monedas = dbHelper.obtenerMonedasTotales(id)
+
+            if (cantidadM > 0) {
+                if (peso < dbHelper.obtenerPesoMax()) {
+                    val monedasNext =
+                        monedas + (objetosMercader?.get(objetoMActual)?.getPrecio() ?: 0)
+                    if (monedasNext <= 0) Toast.makeText(
+                        this,
+                        "No tienes suficientes monedas",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else {
+                        dbHelper.actualizarArticuloMercader(id, idArticulo, cantidadM - 1)
+                        dbHelper.actualizarArticuloPersonaje(
+                            id,
+                            dbHelper.obtenerIdArticuloPorNombre(Articulos.Nombre.MONEDA.toString()),
+                            monedas + (objetosMercader?.get(objetoMActual)
+                                ?.getPrecio()
+                                ?: 0)
+                        )
+                        Toast.makeText(
+                            this,
+                            "- ${
+                                objetosMercader?.get(objetoMActual)?.getPrecio()
+                            } monedas, ${cantidadM - 1} items restantes",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else Toast.makeText(this, "Superas el peso maximo", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(this, "No hay suficientes items para comprar", Toast.LENGTH_SHORT)
+                .show()
+
+            dbHelper.actualizarArticuloPersonaje(id, idArticulo, cantidadP + 1)
         }
 
         btnVenderObjeto.setOnClickListener {
             objetosMercader = id?.let { dbHelper.obtenerArticulosDeMercader(it) }
             objetosPersonaje = id?.let { dbHelper.obtenerArticulosDePersonaje(it) }
             val idArticulo = dbHelper.obtenerIdArticuloPorNombre(
-                objetosPersonaje?.get(objetoPActual)?.getNombre().toString())
-            val cantidad = id?.let { it1 -> idArticulo?.let { it2 ->
-                dbHelper.obtenerCantidadArticuloMercader(it1,
-                    it2
+                objetosPersonaje?.get(objetoPActual)?.getNombre().toString()
+            )
+            val cantidadP = dbHelper.obtenerCantidadArticuloPersonaje(id, idArticulo)
+            val cantidadM = dbHelper.obtenerCantidadArticuloMercader(id, idArticulo)
+            val monedas = dbHelper.obtenerMonedasTotales(id)
+
+            if (cantidadP > 0) {
+                dbHelper.actualizarArticuloPersonaje(id, idArticulo, cantidadP - 1)
+                dbHelper.actualizarArticuloPersonaje(
+                    id,
+                    dbHelper.obtenerIdArticuloPorNombre(Articulos.Nombre.MONEDA.toString()),
+                    monedas + (objetosPersonaje?.get(objetoPActual)
+                        ?.getPrecio()
+                        ?: 0)
                 )
-            } }
-            if (id != null) {
-                if (cantidad != null) {
-                    if (idArticulo != null) {
-                        dbHelper.actualizarArticuloPersonaje(id, idArticulo, cantidad - 1)
-                    }
-                    if (objetosMercader?.contains(objetosPersonaje?.get(objetoPActual)) == true)
-                        idArticulo?.let { it1 ->
-                            dbHelper.actualizarArticuloMercader(id,
-                                it1, cantidad)
-                        }
-                    else idArticulo?.let { it1 -> dbHelper.agregarArticuloMercader(id, it1, 1) }
-                    Toast.makeText(this, "articulo vendido + ${objetosMercader?.get(objetoMActual)
-                        ?.getPrecio()} coins", Toast.LENGTH_SHORT).show()
-                }
-            }
+                Toast.makeText(
+                    this,
+                    "+ ${
+                        objetosPersonaje?.get(objetoPActual)?.getPrecio()
+                    } monedas añadidas, ${cantidadP - 1} items restantes",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else Toast.makeText(
+                this,
+                "No tienes suficientes items para vender",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            dbHelper.actualizarArticuloMercader(id, idArticulo, cantidadM + 1)
         }
 
         btnAdelanteItemC.setOnClickListener {
-            if (objetosMercader?.isNotEmpty() == true){
-                if (objetoMActual == (objetosMercader?.size?.minus(2) ?: 0)){
+            if (objetosMercader?.isNotEmpty() == true) {
+                if (objetoMActual == (objetosMercader?.size?.minus(2) ?: 0)) {
                     objetoMActual = 0
                 } else {
                     objetoMActual += 1
@@ -231,8 +269,8 @@ class MercaderActivity : BaseActivity() {
         }
 
         btnAtrasItemC.setOnClickListener {
-            if (objetosMercader?.isNotEmpty() == true){
-                if (objetoMActual == 0){
+            if (objetosMercader?.isNotEmpty() == true) {
+                if (objetoMActual == 0) {
                     objetoMActual = (objetosMercader?.size ?: 0) - 2
                 } else {
                     objetoMActual -= 1
@@ -243,37 +281,39 @@ class MercaderActivity : BaseActivity() {
         }
 
         btnAdelanteItemV.setOnClickListener {
-            if (objetosPersonaje?.isNotEmpty() == true){
-                if (objetosPersonaje?.size!! > 1){
-                    if (objetoPActual == (objetosPersonaje?.size?.minus(2) ?: 0)){
+            if (objetosPersonaje?.isNotEmpty() == true) {
+                if (objetosPersonaje?.size!! > 1) {
+                    if (objetoPActual == (objetosPersonaje?.size?.minus(2) ?: 0)) {
                         objetoPActual = 0
                     } else {
                         objetoPActual += 1
                     }
                 }
                 Log.i("ayuda", "$objetoPActual")
-                objetosPersonaje?.get(objetoPActual)?.let { it1 -> imgV.setImageResource(it1.getUri()) }
+                objetosPersonaje?.get(objetoPActual)
+                    ?.let { it1 -> imgV.setImageResource(it1.getUri()) }
             }
         }
 
         btnAtrasItemV.setOnClickListener {
-            if (objetosPersonaje?.isNotEmpty() == true){
-                if (objetosPersonaje?.size!! > 1){
-                    if (objetoPActual == 0){
+            if (objetosPersonaje?.isNotEmpty() == true) {
+                if (objetosPersonaje?.size!! > 1) {
+                    if (objetoPActual == 0) {
                         objetoPActual = (objetosPersonaje?.size ?: 0) - 2
                     } else {
                         objetoPActual -= 1
                     }
                 } else objetoPActual = 0
                 Log.i("ayuda", "$objetoPActual")
-                objetosPersonaje?.get(objetoPActual)?.let { it1 -> imgV.setImageResource(it1.getUri()) }
+                objetosPersonaje?.get(objetoPActual)
+                    ?.let { it1 -> imgV.setImageResource(it1.getUri()) }
             }
         }
 
     }
 
-    private fun setUpV(lista : List<Articulos>, objeto : Int){
-        if (lista.isNotEmpty()){
+    private fun setUpV(lista: List<Articulos>, objeto: Int) {
+        if (lista.isNotEmpty()) {
             imgV.setImageResource(lista[objeto].getUri())
             nombreV.text = lista[objeto].getNombre().toString()
             val peso = "${lista[objeto].getPeso()} Kg"
@@ -283,8 +323,8 @@ class MercaderActivity : BaseActivity() {
         }
     }
 
-    private fun setUpC(lista : List<Articulos>, objeto : Int){
-        if (lista.isNotEmpty()){
+    private fun setUpC(lista: List<Articulos>, objeto: Int) {
+        if (lista.isNotEmpty()) {
             imgC.setImageResource(lista[objeto].getUri())
             nombreC.text = lista[objeto].getNombre().toString()
             val peso = "${lista[objeto].getPeso()} Kg"

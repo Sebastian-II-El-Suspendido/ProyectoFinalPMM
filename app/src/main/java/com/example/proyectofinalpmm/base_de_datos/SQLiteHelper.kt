@@ -60,6 +60,8 @@ class SQLiteHelper(context: Context) :
         private const val COLUMN_ID_PERSONAJE = "id_personaje"
         private const val COLUMN_NOMBRE_RESPUESTA = "nombre"
         private const val COLUMN_CONTENIDO = "mensaje"
+
+        private const val PESOMAX = 120
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -151,38 +153,144 @@ class SQLiteHelper(context: Context) :
 
         if (count == 0) {
             val listaArticulos = arrayListOf(
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, R.drawable.amuleto),
-                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 10, 15, R.drawable.baston),
-                Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, R.drawable.daga),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.GRIMORIO, 10, 10, R.drawable.grimorio),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.HUEVO, 15, 20, R.drawable.huevo),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, R.drawable.mapa),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.PERGAMINOS, 5, 5, R.drawable.pergaminos),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.POCION, 5, 15, R.drawable.pocion),
-                Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.RUNAS, 5, 15, R.drawable.runas),
-                Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, R.drawable.moneda)
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.AMULETO,
+                    5,
+                    15,
+                    R.drawable.amuleto
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.ARMA,
+                    Articulos.Nombre.BASTON,
+                    10,
+                    15,
+                    R.drawable.baston
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.ARMA,
+                    Articulos.Nombre.DAGA,
+                    15,
+                    20,
+                    R.drawable.daga
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.GRIMORIO,
+                    10,
+                    10,
+                    R.drawable.grimorio
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.HUEVO,
+                    15,
+                    20,
+                    R.drawable.huevo
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.MAPA,
+                    5,
+                    10,
+                    R.drawable.mapa
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.PERGAMINOS,
+                    5,
+                    5,
+                    R.drawable.pergaminos
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.POCION,
+                    5,
+                    15,
+                    R.drawable.pocion
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.OBJETO,
+                    Articulos.Nombre.RUNAS,
+                    5,
+                    15,
+                    R.drawable.runas
+                ),
+                Articulos(
+                    Articulos.TipoArticulo.ORO,
+                    Articulos.Nombre.MONEDA,
+                    0,
+                    5,
+                    R.drawable.moneda
+                )
             )
             listaArticulos.forEach { insertarArticulo(it) }
         }
     }
 
-    fun meterArticulosMercader(idMercader: String){
+    fun meterArticulosMercader(idMercader: String) {
         val listaArticulos = arrayListOf(
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.AMULETO, 5, 15, R.drawable.amuleto),
-            Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.BASTON, 10, 15, R.drawable.baston),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.AMULETO,
+                5,
+                15,
+                R.drawable.amuleto
+            ),
+            Articulos(
+                Articulos.TipoArticulo.ARMA,
+                Articulos.Nombre.BASTON,
+                10,
+                15,
+                R.drawable.baston
+            ),
             Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, R.drawable.daga),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.GRIMORIO, 10, 10, R.drawable.grimorio),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.HUEVO, 15, 20, R.drawable.huevo),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.GRIMORIO,
+                10,
+                10,
+                R.drawable.grimorio
+            ),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.HUEVO,
+                15,
+                20,
+                R.drawable.huevo
+            ),
             Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, R.drawable.mapa),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.PERGAMINOS, 5, 5, R.drawable.pergaminos),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.POCION, 5, 15, R.drawable.pocion),
-            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.RUNAS, 5, 15, R.drawable.runas),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.PERGAMINOS,
+                5,
+                5,
+                R.drawable.pergaminos
+            ),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.POCION,
+                5,
+                15,
+                R.drawable.pocion
+            ),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.RUNAS,
+                5,
+                15,
+                R.drawable.runas
+            ),
             Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, R.drawable.moneda)
         )
-        listaArticulos.forEach { obtenerIdArticuloPorNombre(it.getNombre().toString())?.let { it1 ->
-            agregarArticuloMercader( idMercader,
-                it1, (0..20).random() )
-        } }
+        listaArticulos.forEach {
+            obtenerIdArticuloPorNombre(it.getNombre().toString())?.let { it1 ->
+                agregarArticuloMercader(
+                    idMercader,
+                    it1, (0..20).random()
+                )
+            }
+        }
     }
 
     fun iniciarPersonajes(context: Context) {
@@ -285,11 +393,75 @@ class SQLiteHelper(context: Context) :
         return idR
     }
 
-    private fun iniciacionDePersonaje(idPersonaje: String){
-        val articulo = Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, R.drawable.moneda)
+    private fun iniciacionDePersonaje(idPersonaje: String) {
+        val articulo =
+            Articulos(Articulos.TipoArticulo.ORO, Articulos.Nombre.MONEDA, 0, 5, R.drawable.moneda)
+        val listaArticulos = arrayListOf(
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.AMULETO,
+                5,
+                15,
+                R.drawable.amuleto
+            ),
+            Articulos(
+                Articulos.TipoArticulo.ARMA,
+                Articulos.Nombre.BASTON,
+                10,
+                15,
+                R.drawable.baston
+            ),
+            Articulos(Articulos.TipoArticulo.ARMA, Articulos.Nombre.DAGA, 15, 20, R.drawable.daga),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.GRIMORIO,
+                10,
+                10,
+                R.drawable.grimorio
+            ),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.HUEVO,
+                15,
+                20,
+                R.drawable.huevo
+            ),
+            Articulos(Articulos.TipoArticulo.OBJETO, Articulos.Nombre.MAPA, 5, 10, R.drawable.mapa),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.PERGAMINOS,
+                5,
+                5,
+                R.drawable.pergaminos
+            ),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.POCION,
+                5,
+                15,
+                R.drawable.pocion
+            ),
+            Articulos(
+                Articulos.TipoArticulo.OBJETO,
+                Articulos.Nombre.RUNAS,
+                5,
+                15,
+                R.drawable.runas
+            ),
+        )
         obtenerIdArticuloPorNombre(articulo.getNombre().toString())?.let {
-            agregarArticuloPersonaje(idPersonaje,
-                it, 10)
+            agregarArticuloPersonaje(
+                idPersonaje,
+                it, 10
+            )
+        }
+        listaArticulos.forEach {
+            obtenerIdArticuloPorNombre(it.getNombre().toString())?.let { it1 ->
+                agregarArticuloPersonaje(
+                    idPersonaje,
+                    it1, 0
+                )
+            }
         }
     }
 
@@ -398,10 +570,11 @@ class SQLiteHelper(context: Context) :
     }
 
     @SuppressLint("Range")
-    fun obtenerArticulosDePersonaje(idPersonaje: String): List<Articulos> {
+    fun obtenerArticulosDePersonaje(idPersonaje: String?): List<Articulos> {
         val listaArticulos = mutableListOf<Articulos>()
 
-        val selectQuery = "SELECT * FROM $TABLA_PERSONAJE_ARTICULOS WHERE $COLUMN_ID_PERSONAJE_REL = ?"
+        val selectQuery =
+            "SELECT * FROM $TABLA_PERSONAJE_ARTICULOS WHERE $COLUMN_ID_PERSONAJE_REL = ?"
         val db = this.readableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(idPersonaje))
 
@@ -418,25 +591,22 @@ class SQLiteHelper(context: Context) :
 
         return listaArticulos
     }
-    fun actualizarArticuloPersonaje(idPersonaje: String, idObjeto: Int, nuevaCantidad: Int) {
+
+    fun actualizarArticuloPersonaje(idPersonaje: String?, idObjeto: Int?, nuevaCantidad: Int) {
         val db = this.writableDatabase
         val whereClause = "$COLUMN_ID_PERSONAJE_REL = ? AND $COLUMN_ID_OBJETO_REL_OP = ?"
         val whereArgs = arrayOf(idPersonaje, idObjeto.toString())
-
-        if (nuevaCantidad <= 0) {
-            db.delete(TABLA_PERSONAJE_ARTICULOS, whereClause, whereArgs)
-        } else {
-            val contentValues = ContentValues().apply {
-                put(COLUMN_CANTIDAD_OP, nuevaCantidad)
-            }
-            db.update(TABLA_PERSONAJE_ARTICULOS, contentValues, whereClause, whereArgs)
+        val contentValues = ContentValues().apply {
+            put(COLUMN_CANTIDAD_OP, nuevaCantidad)
         }
+        db.update(TABLA_PERSONAJE_ARTICULOS, contentValues, whereClause, whereArgs)
     }
 
     @SuppressLint("Range")
-    fun obtenerCantidadArticuloPersonaje(idPersonaje: String, idObjeto: Int): Int {
+    fun obtenerCantidadArticuloPersonaje(idPersonaje: String?, idObjeto: Int?): Int {
         val db = this.readableDatabase
-        val selectQuery = "SELECT $COLUMN_CANTIDAD_OP FROM $TABLA_PERSONAJE_ARTICULOS WHERE $COLUMN_ID_PERSONAJE_REL = ? AND $COLUMN_ID_OBJETO_REL_OP = ?"
+        val selectQuery =
+            "SELECT $COLUMN_CANTIDAD_OP FROM $TABLA_PERSONAJE_ARTICULOS WHERE $COLUMN_ID_PERSONAJE_REL = ? AND $COLUMN_ID_OBJETO_REL_OP = ?"
         val cursor = db.rawQuery(selectQuery, arrayOf(idPersonaje, idObjeto.toString()))
 
         var cantidad = 0
@@ -449,10 +619,36 @@ class SQLiteHelper(context: Context) :
         return cantidad
     }
 
+    fun obtenerPesoTotalPersonaje(idPersonaje: String?, lista: List<Articulos>?) : Int{
+        var peso = 0
+        if (lista != null) {
+            if (lista.isNotEmpty()){
+                lista.forEach {
+                    val idObjeto = obtenerIdArticuloPorNombre(it.getNombre().toString())
+                    val cantidad = obtenerCantidadArticuloPersonaje(idPersonaje, idObjeto)
+
+                    peso += (cantidad * it.getPeso())
+                }
+            }
+        }
+        return peso
+    }
+
+    fun obtenerPesoMax() : Int {
+        return PESOMAX
+    }
+
+    fun obtenerMonedasTotales(idPersonaje: String?) : Int {
+        var monedas = 0
+        monedas += (obtenerCantidadArticuloPersonaje(idPersonaje, obtenerIdArticuloPorNombre(Articulos.Nombre.MONEDA.toString())) * 5)
+        return monedas
+    }
+
     @SuppressLint("Range")
-    fun obtenerCantidadArticuloMercader(idMercader: String, idObjeto: Int): Int {
+    fun obtenerCantidadArticuloMercader(idMercader: String?, idObjeto: Int?): Int {
         val db = this.readableDatabase
-        val selectQuery = "SELECT $COLUMN_CANTIDAD_OM FROM $TABLA_MERCADER_ARTICULOS WHERE $COLUMN_ID_MERCADER_REL = ? AND $COLUMN_ID_OBJETO_REL_OM = ?"
+        val selectQuery =
+            "SELECT $COLUMN_CANTIDAD_OM FROM $TABLA_MERCADER_ARTICULOS WHERE $COLUMN_ID_MERCADER_REL = ? AND $COLUMN_ID_OBJETO_REL_OM = ?"
         val cursor = db.rawQuery(selectQuery, arrayOf(idMercader, idObjeto.toString()))
 
         var cantidad = 0
@@ -465,7 +661,7 @@ class SQLiteHelper(context: Context) :
         return cantidad
     }
 
-    fun insertarMercader(id: String) : Long {
+    fun insertarMercader(id: String): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_ID_MERCADER, id)
@@ -505,7 +701,8 @@ class SQLiteHelper(context: Context) :
     fun obtenerArticulosDeMercader(idMercader: String): List<Articulos> {
         val listaArticulos = mutableListOf<Articulos>()
 
-        val selectQuery = "SELECT * FROM $TABLA_MERCADER_ARTICULOS WHERE $COLUMN_ID_MERCADER_REL = ?"
+        val selectQuery =
+            "SELECT * FROM $TABLA_MERCADER_ARTICULOS WHERE $COLUMN_ID_MERCADER_REL = ?"
         val db = this.readableDatabase
         val cursor = db.rawQuery(selectQuery, arrayOf(idMercader))
         while (cursor.moveToNext()) {
@@ -522,19 +719,14 @@ class SQLiteHelper(context: Context) :
         return listaArticulos
     }
 
-    fun actualizarArticuloMercader(idMercader: String, idObjeto: Int, nuevaCantidad: Int) {
+    fun actualizarArticuloMercader(idMercader: String?, idObjeto: Int?, nuevaCantidad: Int) {
         val db = this.writableDatabase
         val whereClause = "$COLUMN_ID_MERCADER_REL = ? AND $COLUMN_ID_OBJETO_REL_OM = ?"
         val whereArgs = arrayOf(idMercader, idObjeto.toString())
-
-        if (nuevaCantidad <= 0) {
-            db.delete(TABLA_MERCADER_ARTICULOS, whereClause, whereArgs)
-        } else {
-            val contentValues = ContentValues().apply {
-                put(COLUMN_CANTIDAD_OM, nuevaCantidad)
-            }
-            db.update(TABLA_MERCADER_ARTICULOS, contentValues, whereClause, whereArgs)
+        val contentValues = ContentValues().apply {
+            put(COLUMN_CANTIDAD_OM, nuevaCantidad)
         }
+        db.update(TABLA_MERCADER_ARTICULOS, contentValues, whereClause, whereArgs)
     }
 
     private fun insertarArticulo(articulo: Articulos): Long {
@@ -549,49 +741,6 @@ class SQLiteHelper(context: Context) :
         val id = db.insert(TABLA_OBJETOS, null, values)
         db.close()
         return id
-    }
-
-    @SuppressLint("Range")
-    fun buscarArticuloPorNombre(nombreArticulo: String): Articulos? {
-        val db = this.readableDatabase
-        val selectQuery =
-            "SELECT * FROM $TABLA_OBJETOS WHERE $COLUMN_NOMBRE_ARTICULO LIKE ?"
-        val cursor = db.rawQuery(selectQuery, arrayOf(nombreArticulo))
-
-        var articulo: Articulos? = null
-
-        if (cursor.moveToFirst()) {
-            val tipoArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_TIPO_ARTICULO))
-            val peso = cursor.getInt(cursor.getColumnIndex(COLUMN_PESO))
-            val precio = cursor.getInt(cursor.getColumnIndex(COLUMN_PRECIO))
-            val uri = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_IMAGEN))
-
-            val tipoArticulo = when (tipoArticuloString) {
-                "ARMA" -> Articulos.TipoArticulo.ARMA
-                "OBJETO" -> Articulos.TipoArticulo.OBJETO
-                "ORO" -> Articulos.TipoArticulo.ORO
-                else -> Articulos.TipoArticulo.OBJETO
-            }
-
-            val nombreArticuloE = when(nombreArticulo) {
-                "AMULETO" -> Articulos.Nombre.AMULETO
-                "BASTON" -> Articulos.Nombre.BASTON
-                "DAGA" -> Articulos.Nombre.DAGA
-                "GRIMORIO" -> Articulos.Nombre.GRIMORIO
-                "HUEVO" -> Articulos.Nombre.HUEVO
-                "MAPA" -> Articulos.Nombre.MAPA
-                "PERGAMINOS" -> Articulos.Nombre.PERGAMINOS
-                "POCION" -> Articulos.Nombre.POCION
-                "RUNAS" -> Articulos.Nombre.RUNAS
-                "MONEDA" -> Articulos.Nombre.MONEDA
-                else -> Articulos.Nombre.AMULETO
-            }
-            articulo = Articulos(tipoArticulo, nombreArticuloE, peso, precio, uri)
-        }
-        cursor.close()
-        db.close()
-
-        return articulo
     }
 
     @SuppressLint("Range")
@@ -623,7 +772,8 @@ class SQLiteHelper(context: Context) :
 
         if (cursor.moveToFirst()) {
             val tipoArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_TIPO_ARTICULO))
-            val nombreArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
+            val nombreArticuloString =
+                cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
             val peso = cursor.getInt(cursor.getColumnIndex(COLUMN_PESO))
             val precio = cursor.getInt(cursor.getColumnIndex(COLUMN_PRECIO))
             val uri = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_IMAGEN))
@@ -635,7 +785,8 @@ class SQLiteHelper(context: Context) :
                 else -> Articulos.TipoArticulo.OBJETO
             }
 
-            val nombreArticuloEnum = Articulos.Nombre.valueOf(nombreArticuloString) // Convertir cadena a enum
+            val nombreArticuloEnum =
+                Articulos.Nombre.valueOf(nombreArticuloString) // Convertir cadena a enum
 
             articulo = Articulos(tipoArticulo, nombreArticuloEnum, peso, precio, uri)
         }
@@ -654,7 +805,8 @@ class SQLiteHelper(context: Context) :
 
         while (cursor.moveToNext()) {
             val tipoArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_TIPO_ARTICULO))
-            val nombreArticuloString = cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
+            val nombreArticuloString =
+                cursor.getString(cursor.getColumnIndex(COLUMN_NOMBRE_ARTICULO))
             val peso = cursor.getInt(cursor.getColumnIndex(COLUMN_PESO))
             val precio = cursor.getInt(cursor.getColumnIndex(COLUMN_PRECIO))
             val uri = cursor.getInt(cursor.getColumnIndex(COLUMN_ID_IMAGEN))
