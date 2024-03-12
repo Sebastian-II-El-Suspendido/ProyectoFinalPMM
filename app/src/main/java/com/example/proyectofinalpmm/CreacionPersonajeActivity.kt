@@ -69,7 +69,6 @@ class CreacionPersonajeActivity : BaseActivity() {
             }
         }
 
-
         val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
         globalButton.setOnClickListener {
             val intentb = Intent(this, AjustesActivity::class.java)

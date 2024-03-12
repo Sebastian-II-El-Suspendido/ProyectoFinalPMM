@@ -37,10 +37,17 @@ class MercaderActivity : BaseActivity() {
     private lateinit var imgC : ImageView
 
     private lateinit var nombreC : TextView
+    private lateinit var pesoC : TextView
+    private lateinit var precioC : TextView
     private lateinit var nombreV : TextView
+    private lateinit var pesoV : TextView
+    private lateinit var precioV : TextView
 
     private lateinit var btnAdelanteItemC : ImageView
     private lateinit var btnAtrasItemC : ImageView
+
+    private lateinit var btnAdelanteItemV : ImageView
+    private lateinit var btnAtrasItemV : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,11 +85,18 @@ class MercaderActivity : BaseActivity() {
         btnVenderObjeto = binding.button13V
         btnComprarObjeto = binding.button13
 
-        nombreC = binding.textNombre
-        nombreV = binding.textNombreV
+        nombreV = binding.textNombre
+        pesoV = binding.textPeso
+        precioV = binding.textTipo
+        nombreC = binding.textNombreV
+        pesoC = binding.textPesoV
+        precioC = binding.textTipoV
 
         btnAdelanteItemC = binding.buttonadelanteV
         btnAtrasItemC = binding.buttonatrasV
+
+        btnAdelanteItemV = binding.buttonadelante
+        btnAtrasItemV = binding.buttonatras
 
         btnComerciar.visibility = View.VISIBLE
         btnContinuar.visibility = View.VISIBLE
@@ -205,38 +219,78 @@ class MercaderActivity : BaseActivity() {
         }
 
         btnAdelanteItemC.setOnClickListener {
-            if (objetoMActual == (objetosMercader?.size?.minus(2) ?: 0)){
-                objetoMActual = 0
-            } else {
-                objetoMActual += 1
+            if (objetosMercader?.isNotEmpty() == true){
+                if (objetoMActual == (objetosMercader?.size?.minus(2) ?: 0)){
+                    objetoMActual = 0
+                } else {
+                    objetoMActual += 1
+                }
+                Log.i("ayuda", "$objetoMActual")
+                setUpC(objetosMercader!!, objetoMActual)
             }
-            Log.i("ayuda", "$objetoMActual")
-            objetosMercader?.get(objetoMActual)?.let { it1 -> imgC.setImageResource(it1.getUri()) }
         }
 
         btnAtrasItemC.setOnClickListener {
-            if (objetoMActual == 0){
-                objetoMActual = (objetosMercader?.size ?: 0) - 2
-            } else {
-                objetoMActual -= 1
+            if (objetosMercader?.isNotEmpty() == true){
+                if (objetoMActual == 0){
+                    objetoMActual = (objetosMercader?.size ?: 0) - 2
+                } else {
+                    objetoMActual -= 1
+                }
+                Log.i("ayuda", "$objetoMActual")
+                setUpC(objetosMercader!!, objetoMActual)
             }
-            Log.i("ayuda", "$objetoMActual")
-            objetosMercader?.get(objetoMActual)?.let { it1 -> imgC.setImageResource(it1.getUri()) }
+        }
+
+        btnAdelanteItemV.setOnClickListener {
+            if (objetosPersonaje?.isNotEmpty() == true){
+                if (objetosPersonaje?.size!! > 1){
+                    if (objetoPActual == (objetosPersonaje?.size?.minus(2) ?: 0)){
+                        objetoPActual = 0
+                    } else {
+                        objetoPActual += 1
+                    }
+                }
+                Log.i("ayuda", "$objetoPActual")
+                objetosPersonaje?.get(objetoPActual)?.let { it1 -> imgV.setImageResource(it1.getUri()) }
+            }
+        }
+
+        btnAtrasItemV.setOnClickListener {
+            if (objetosPersonaje?.isNotEmpty() == true){
+                if (objetosPersonaje?.size!! > 1){
+                    if (objetoPActual == 0){
+                        objetoPActual = (objetosPersonaje?.size ?: 0) - 2
+                    } else {
+                        objetoPActual -= 1
+                    }
+                } else objetoPActual = 0
+                Log.i("ayuda", "$objetoPActual")
+                objetosPersonaje?.get(objetoPActual)?.let { it1 -> imgV.setImageResource(it1.getUri()) }
+            }
         }
 
     }
 
-    fun setUpV(lista : List<Articulos>, objeto : Int){
+    private fun setUpV(lista : List<Articulos>, objeto : Int){
         if (lista.isNotEmpty()){
             imgV.setImageResource(lista[objeto].getUri())
             nombreV.text = lista[objeto].getNombre().toString()
+            val peso = "${lista[objeto].getPeso()} Kg"
+            pesoV.text = peso
+            val precio = "${lista[objeto].getPeso()} €"
+            precioV.text = precio
         }
     }
 
-    fun setUpC(lista : List<Articulos>, objeto : Int){
+    private fun setUpC(lista : List<Articulos>, objeto : Int){
         if (lista.isNotEmpty()){
             imgC.setImageResource(lista[objeto].getUri())
             nombreC.text = lista[objeto].getNombre().toString()
+            val peso = "${lista[objeto].getPeso()} Kg"
+            pesoC.text = peso
+            val precio = "${lista[objeto].getPeso()} €"
+            precioC.text = precio
         }
     }
 }
