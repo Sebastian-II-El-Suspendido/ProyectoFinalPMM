@@ -1,10 +1,7 @@
 package com.example.proyectofinalpmm
 
-//ActivityCorrespondiente a MainActivity del ejercicio 1
-
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -40,7 +37,6 @@ class CreacionPersonajeActivity : BaseActivity() {
         val dbHelper = SQLiteHelper(this)
         val personaje = user?.let { dbHelper.obtenerPersonajePorID(it, this) }
         val mercader = user?.let { dbHelper.obtenerMercaderPorId(it) }
-        Log.i("ayuda", mercader.toString())
         if (personaje != null) {
             if (!modificar) {
                 val musica = user.let { dbHelper.obtenerMusicaorID(it, this) }
@@ -65,7 +61,7 @@ class CreacionPersonajeActivity : BaseActivity() {
             dbHelper.iniciarPersonajes(this)
             if (mercader == false) {
                 dbHelper.insertarMercader(user)
-                dbHelper.meterArticulosMercader(this, user)
+                dbHelper.meterArticulosMercader(user)
             }
         }
 
@@ -186,7 +182,6 @@ class CreacionPersonajeActivity : BaseActivity() {
             // Especificar el layout a usar cuando la lista de opciones aparece
             adapter.setDropDownViewResource(R.layout.customspinner)
             // Aplicar el adapter al spinner
-
         }
     }
 

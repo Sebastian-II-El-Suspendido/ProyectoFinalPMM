@@ -6,6 +6,7 @@ import android.content.ServiceConnection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.Toast
 import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityAjustesBinding
 import com.example.proyectofinalpmm.musica.Musica
@@ -43,6 +44,11 @@ class AjustesActivity : BaseActivity() {
                 intent.action = Musica.ACTION_STOP_MUSIC
                 startService(intent)
             }
+        }
+
+        binding.button8.setOnClickListener {
+            dbHelper.borrarBaseDeDatos(this)
+            Toast.makeText(this, "base de datos de todos los personajes borrada", Toast.LENGTH_SHORT).show()
         }
     }
 }

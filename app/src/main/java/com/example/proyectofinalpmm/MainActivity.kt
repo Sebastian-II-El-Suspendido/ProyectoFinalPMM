@@ -43,9 +43,6 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val dbHelper = SQLiteHelper(this)
-        //dbHelper.borrarBaseDeDatos(this)
-
         // Inicio
         jugar = binding.button
         // Login

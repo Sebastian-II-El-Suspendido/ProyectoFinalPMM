@@ -9,17 +9,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
 import com.example.proyectofinalpmm.databinding.ActivityMercaderBinding
 import com.google.firebase.auth.FirebaseAuth
 
-
 class MercaderActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMercaderBinding
-    private lateinit var listaArticulos: List<Articulos>
-    private var currentIndex = 0
 
     private lateinit var btnComerciar: Button
     private lateinit var btnContinuar: Button
@@ -41,6 +37,9 @@ class MercaderActivity : BaseActivity() {
     private lateinit var nombreC : TextView
     private lateinit var nombreV : TextView
 
+    private lateinit var btnAdelanteItemC : ImageView
+    private lateinit var btnAtrasItemC : ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMercaderBinding.inflate(layoutInflater)
@@ -49,9 +48,12 @@ class MercaderActivity : BaseActivity() {
         val auth = FirebaseAuth.getInstance()
         val id = auth.currentUser?.uid
         val dbHelper = SQLiteHelper(this)
+
         var objetosMercader = id?.let { dbHelper.obtenerArticulosDeMercader(it) }
+        Log.i("ayuda", objetosMercader.toString())
         var objetoMActual = 0
         var objetosPersonaje = id?.let { dbHelper.obtenerArticulosDePersonaje(it) }
+        Log.i("ayuda", objetosPersonaje.toString())
         var objetoPActual = 0
 
         btnComerciar = binding.ComerciarBtn
@@ -66,14 +68,17 @@ class MercaderActivity : BaseActivity() {
         btnAtrasC = binding.button14V
         btnAtrasV = binding.button14
 
-        imgC = binding.imageView12
-        imgV = binding.imageViewV2
+        imgC = binding.imageViewV2
+        imgV = binding.imageView12
 
         btnVenderObjeto = binding.button13V
         btnComprarObjeto = binding.button13
 
         nombreC = binding.textNombre
         nombreV = binding.textNombreV
+
+        btnAdelanteItemC = binding.buttonadelanteV
+        btnAtrasItemC = binding.buttonatrasV
 
         btnComerciar.visibility = View.VISIBLE
         btnContinuar.visibility = View.VISIBLE
@@ -108,7 +113,7 @@ class MercaderActivity : BaseActivity() {
             btnCancelar.visibility = View.GONE
             btnComprar.visibility = View.GONE
             btnVender.visibility = View.GONE
-            objetosMercader?.let { setUpC(it) }
+            objetosMercader?.let { setUpC(it, objetoMActual) }
             Log.i("hola", objetosMercader.toString())
         }
 
@@ -117,7 +122,7 @@ class MercaderActivity : BaseActivity() {
             btnCancelar.visibility = View.GONE
             btnComprar.visibility = View.GONE
             btnVender.visibility = View.GONE
-            objetosPersonaje?.let { setUpV(it) }
+            objetosPersonaje?.let { setUpV(it, objetoPActual) }
         }
 
         btnAtrasC.setOnClickListener {
@@ -187,23 +192,39 @@ class MercaderActivity : BaseActivity() {
             }
         }
 
+        btnAdelanteItemC.setOnClickListener {
+            if (objetoMActual == (objetosMercader?.size?.minus(2) ?: 0)){
+                objetoMActual = 0
+            } else {
+                objetoMActual += 1
+            }
+            Log.i("ayuda", "$objetoMActual")
+            objetosMercader?.get(objetoMActual)?.let { it1 -> imgC.setImageResource(it1.getUri()) }
+        }
+
+        btnAtrasItemC.setOnClickListener {
+            if (objetoMActual == 0){
+                objetoMActual = (objetosMercader?.size ?: 0) - 2
+            } else {
+                objetoMActual -= 1
+            }
+            Log.i("ayuda", "$objetoMActual")
+            objetosMercader?.get(objetoMActual)?.let { it1 -> imgC.setImageResource(it1.getUri()) }
+        }
+
     }
 
-    fun setUpV(lista : List<Articulos>){
-        if (lista.isEmpty()){
-
-        }else {
-            imgV.setImageResource(lista[0].getUri())
-            nombreV.text = lista[0].getNombre().toString()
+    fun setUpV(lista : List<Articulos>, objeto : Int){
+        if (lista.isNotEmpty()){
+            imgV.setImageResource(lista[objeto].getUri())
+            nombreV.text = lista[objeto].getNombre().toString()
         }
     }
 
-    fun setUpC(lista : List<Articulos>){
-        if (lista.isEmpty()){
-
-        }else {
-            imgC.setImageResource(lista[0].getUri())
-            nombreC.text = lista[0].getNombre().toString()
+    fun setUpC(lista : List<Articulos>, objeto : Int){
+        if (lista.isNotEmpty()){
+            imgC.setImageResource(lista[objeto].getUri())
+            nombreC.text = lista[objeto].getNombre().toString()
         }
     }
 }

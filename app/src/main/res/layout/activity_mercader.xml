@@ -325,7 +325,7 @@
         android:gravity="center"
         android:text="Comerciar"
         android:textColor="#404040"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -338,7 +338,7 @@
         android:gravity="center"
         android:text="Continuar"
         android:textColor="#404040"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/ComerciarBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ComerciarBtn" />
