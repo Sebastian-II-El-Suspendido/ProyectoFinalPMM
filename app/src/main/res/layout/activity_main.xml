@@ -36,7 +36,7 @@
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"
             app:boxBackgroundMode="none"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/white">
 
             <EditText
                 android:id="@+id/editTextEmail"
@@ -68,7 +68,7 @@
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"
             app:boxBackgroundMode="none"
-            app:hintTextColor="@color/black"
+            app:hintTextColor="@color/white"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -82,7 +82,7 @@
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:paddingBottom="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -132,7 +132,7 @@
         android:layout_marginEnd="1dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,9 +142,9 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginLeft="40dp"
-            android:fontFamily="@font/silk_bold"
             android:layout_marginRight="40dp"
             android:background="@drawable/borde"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
@@ -162,7 +162,6 @@
                 android:hint="@string/username"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
-
                 android:paddingBottom="12dp"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -192,10 +191,10 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="15dp"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/silk_bold"
                 android:hint="@string/pass"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:fontFamily="@font/silk_bold"
                 android:paddingBottom="10dp"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -209,11 +208,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/borde"
+            android:fontFamily="@font/silk_bold"
             android:gravity="center"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"
-            android:fontFamily="@font/silk_bold"
             app:boxBackgroundMode="none"
             app:hintTextColor="@color/white"
             app:passwordToggleEnabled="true">
@@ -224,10 +223,10 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="15dp"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/silk_bold"
                 android:hint="@string/pass2"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:fontFamily="@font/silk_bold"
                 android:paddingBottom="10dp"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -242,8 +241,8 @@
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:backgroundTint="@color/themeButton"
-            android:text="@string/register"
             android:fontFamily="@font/silk_bold"
+            android:text="@string/register"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
             android:textColorHint="@color/white"

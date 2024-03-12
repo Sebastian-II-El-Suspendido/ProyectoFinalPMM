@@ -93,7 +93,7 @@ class MainActivity : BaseActivity() {
         }
 
         binding.button2.setOnClickListener {
-            intent = Intent(this, CreacionPersonajeActivity::class.java)
+            intent = Intent(this, PersonajeCreadoActivity::class.java)
             startActivity(intent)
         }
     }

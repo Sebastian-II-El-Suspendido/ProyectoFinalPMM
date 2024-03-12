@@ -1,7 +1,10 @@
 package com.example.proyectofinalpmm
 
+//ActivityCorrespondiente a MainActivity del ejercicio 1
+
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -37,6 +40,7 @@ class CreacionPersonajeActivity : BaseActivity() {
         val dbHelper = SQLiteHelper(this)
         val personaje = user?.let { dbHelper.obtenerPersonajePorID(it, this) }
         val mercader = user?.let { dbHelper.obtenerMercaderPorId(it) }
+        Log.i("ayuda", mercader.toString())
         if (personaje != null) {
             if (!modificar) {
                 val musica = user.let { dbHelper.obtenerMusicaorID(it, this) }
@@ -173,25 +177,24 @@ class CreacionPersonajeActivity : BaseActivity() {
 
 
     private fun setupSpinner() {
-        // Crear un ArrayAdapter usando el array de strings y un spinner layout predeterminado
         ArrayAdapter.createFromResource(
             this,
             R.array.spinnerClase,
             R.layout.customspinner
         ).also { adapter ->
-            // Especificar el layout a usar cuando la lista de opciones aparece
             adapter.setDropDownViewResource(R.layout.customspinner)
             // Aplicar el adapter al spinner
         }
     }
 
     fun cambiarImagen() {
-        /*
+
         val raza = spinnerRaza.selectedItem.toString().lowercase()
         val clase = spinnerClase.selectedItem.toString().lowercase()
         val estadoVital = spinnerEstadoVital.selectedItem.toString().lowercase()
         val sentencia = "${clase}_${raza}_${estadoVital}"
         val imagend = when (sentencia){
+            /*
             "brujo_humano_anciano" -> R.drawable.brujo_humano_anciano
             "brujo_humano_adulto" -> R.drawable.brujo_humano_adulto
             "brujo_humano_joven" -> R.drawable.brujo_humano_joven
@@ -216,6 +219,7 @@ class CreacionPersonajeActivity : BaseActivity() {
             "mago_madito_anciano" -> R.drawable.mago_maldito_anciano
             "mago_madito_adulto" -> R.drawable.mago_maldito_adulto
             "mago_madito_joven" -> R.drawable.mago_maldito_joven
+             */
             "guerrero_humano_anciano" -> R.drawable.guerrero_humano_anciano
             "guerrero_humano_adulto" -> R.drawable.guerrero_humano_adulto
             "guerrero_humano_joven" -> R.drawable.guerrero_humano_joven
@@ -225,13 +229,16 @@ class CreacionPersonajeActivity : BaseActivity() {
             "guerrero_enano_anciano" -> R.drawable.guerrero_enano_anciano
             "guerrero_enano_adulto" -> R.drawable.guerrero_enano_adulto
             "guerrero_enano_joven" -> R.drawable.guerrero_enano_joven
-            "guerrero_madito_anciano" -> R.drawable.guerrero_maldito_anciano
-            "guerrero_madito_adulto" -> R.drawable.guerrero_maldito_adulto
-            "guerrero_madito_joven" -> R.drawable.guerrero_maldito_joven
-            else -> {R.drawable.default_humano_adulto}
+            "guerrero_maldito_anciano" -> R.drawable.guerrero_maldito_anciano
+            "guerrero_maldito_adulto" -> R.drawable.guerrero_maldito_adulto
+            "guerrero_maldito_joven" -> R.drawable.guerrero_maldito_joven
+            "guerrero_orco_anciano" -> R.drawable.guerrero_orco_anciano
+            "guerrero_orco_adulto" -> R.drawable.guerrero_orco_adulto
+            "guerrero_orco_joven" -> R.drawable.guerrero_orco_joven
+            else -> {R.drawable.personajesinselect}
         }
         imagen.setImageResource(imagend)
 
-         */
+
     }
 }

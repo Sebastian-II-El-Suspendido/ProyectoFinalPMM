@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imgEnemigo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="112dp"
         android:src="@drawable/enemigo1"
@@ -19,8 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
-
+        app:layout_constraintVertical_bias="0.53" />
 
     <ImageView
         android:id="@+id/imgEnemigoDragon"
@@ -71,13 +70,13 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="112dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="152dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67"
+        app:layout_constraintVertical_bias="0.635"
         app:srcCompat="@drawable/guerrero_humano_adulto" />
 
     <ImageView
@@ -97,14 +96,16 @@
 
     <ImageView
         android:id="@+id/PersonajeVictorioso"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="124dp"
         android:src="@drawable/guerrero_humano_adulto"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <include layout="@layout/ajustes" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifCalavera"
@@ -175,11 +176,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/bordemarcos"
         android:fontFamily="@font/silk_bold"
         android:gravity="center"
@@ -192,13 +194,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/ajustes" />
-
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="#6B8096"
         android:fontFamily="@font/silk_bold"
         android:gravity="center"
