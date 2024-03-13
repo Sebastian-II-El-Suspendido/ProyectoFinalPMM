@@ -89,9 +89,9 @@ class EnemigoActivity : BaseActivity() {
 
 
         val overlayView = findViewById<View>(R.id.blackOverlay)
-        overlayView.visibility = View.VISIBLE // Haz visible la vista de superposición
+        overlayView.visibility = View.VISIBLE
 
-        //Boton luchar
+ 
         btnRecoger.setOnClickListener {
             val intent = Intent(this, TobeContinuedActivity::class.java)
             animateFadeToBlackAndBack(overlayView)
@@ -119,7 +119,6 @@ class EnemigoActivity : BaseActivity() {
 
     private fun animateFadeToBlackAndBack(overlay: View) {
         overlay.visibility = View.VISIBLE
-        // Comienza el fundido a negro
         overlay.animate().alpha(1f).setDuration(2000)
             .withEndAction {
                 exploision1.visibility = View.VISIBLE
@@ -127,9 +126,7 @@ class EnemigoActivity : BaseActivity() {
                 exploision3.visibility = View.VISIBLE
                 exploision4.visibility = View.VISIBLE
 
-                // Delay para mantener las explosiones visibles por un tiempo
                 Handler(Looper.getMainLooper()).postDelayed({
-                    // Hace las imágenes de explosión invisibles
                     exploision1.visibility= View.INVISIBLE
                     exploision2.visibility= View.INVISIBLE
                     exploision3.visibility= View.INVISIBLE
@@ -144,19 +141,12 @@ class EnemigoActivity : BaseActivity() {
                         btnVolver.visibility=View.VISIBLE
                         animateText(textito,"La batalla ha terminado y sales victorioso")
                     }
-                    //else{ GANASTE !?
-
-
-
-                    // Inmediatamente después de hacer invisibles las explosiones, comienza el desvanecimiento
                     overlay.animate().alpha(0f).setDuration(2000)
                         .withEndAction {
-
                             overlay.visibility = View.GONE
-
-                        }.start() // Asegúrate de iniciar esta animación
-                }, 5000) // Este delay determina cuánto tiempo después de la animación de fundido a negro se ejecutan las acciones
-            }.start() // Inicia la animación de fundido a negro
+                        }.start()
+                }, 5000)
+            }.start()
     }
 
 }

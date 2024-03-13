@@ -18,6 +18,9 @@
         android:theme="@style/Theme.ProyectoFinalPMM"
         tools:targetApi="31">
         <activity
+            android:name=".DetallesCasita"
+            android:exported="false" />
+        <activity
             android:name=".Recolectar"
             android:exported="false" />
         <activity

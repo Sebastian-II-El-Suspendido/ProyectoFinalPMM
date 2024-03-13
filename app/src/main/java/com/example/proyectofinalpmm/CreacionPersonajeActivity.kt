@@ -92,16 +92,15 @@ class CreacionPersonajeActivity : BaseActivity() {
             if (valido) {
                 val raza = when (spinnerRaza.selectedItemId.toInt()) {
                     1 -> PersonajeP.Raza.Humano
-                    2 -> PersonajeP.Raza.Elfo
-                    3 -> PersonajeP.Raza.Enano
-                    4 -> PersonajeP.Raza.Maldito
+             //       2 -> PersonajeP.Raza.
+                    3 -> PersonajeP.Raza.Elfo
+                    4 -> PersonajeP.Raza.Enano
+                    5 -> PersonajeP.Raza.Maldito
                     else -> PersonajeP.Raza.Humano
                 }
 
                 val clase = when (spinnerClase.selectedItemId.toInt()) {
-                    1 -> PersonajeP.Clase.Brujo
-                    2 -> PersonajeP.Clase.Mago
-                    3 -> PersonajeP.Clase.Guerrero
+                    1 -> PersonajeP.Clase.Guerrero
                     else -> PersonajeP.Clase.Brujo
                 }
 

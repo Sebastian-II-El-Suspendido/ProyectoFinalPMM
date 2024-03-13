@@ -94,20 +94,21 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/personajesinselect"
+        android:layout_width="186dp"
+        android:layout_height="201dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57" />
+        app:layout_constraintVertical_bias="0.627" />
 
     <TextView
         android:id="@+id/NombrePersonaje"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/bordemarcos"
         android:fontFamily="@font/silk_bold"
         android:gravity="center"
@@ -118,10 +119,11 @@
         android:paddingEnd="10dp"
         android:textColor="#404040"
         android:textColorHint="#404040"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button4"
