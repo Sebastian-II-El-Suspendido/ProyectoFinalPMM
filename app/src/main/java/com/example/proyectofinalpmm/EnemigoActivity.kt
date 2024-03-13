@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.example.proyectofinalpmm.base_de_datos.SQLiteHelper
+import com.google.firebase.auth.FirebaseAuth
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -118,6 +121,11 @@ class EnemigoActivity : BaseActivity() {
 
 
     private fun animateFadeToBlackAndBack(overlay: View) {
+
+        val auth = FirebaseAuth.getInstance()
+        val id = auth.currentUser?.uid
+        val dbHelper = SQLiteHelper(this)
+
         overlay.visibility = View.VISIBLE
         // Comienza el fundido a negro
         overlay.animate().alpha(1f).setDuration(2000)
@@ -137,6 +145,10 @@ class EnemigoActivity : BaseActivity() {
                     if (enemigo == R.drawable.enemigodragon) {
                         fondomuerto.visibility = View.VISIBLE
                         calavera.visibility = View.VISIBLE
+                        Toast.makeText(this, "Personaje eliminado", Toast.LENGTH_SHORT).show()
+                        dbHelper.deletePersonaje(id)
+                        intent = Intent(this@EnemigoActivity, CreacionPersonajeActivity::class.java)
+
                     }else{
                         fondovivo.visibility= View.VISIBLE
                         imgvictorioso.visibility= View.VISIBLE

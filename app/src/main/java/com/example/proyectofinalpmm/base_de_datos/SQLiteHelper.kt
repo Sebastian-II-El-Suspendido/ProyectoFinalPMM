@@ -465,6 +465,23 @@ class SQLiteHelper(context: Context) :
         }
     }
 
+    fun deletePersonaje(personajeId: String?): Int {
+        val db = this.writableDatabase
+        db.beginTransaction()
+        try {
+            db.delete(TABLA_PERSONAJE_ARTICULOS, "$COLUMN_ID_PERSONAJE_REL = ?", arrayOf(personajeId))
+            db.delete(TABLA_CHAT, "$COLUMN_ID_PERSONAJE = ?", arrayOf(personajeId))
+            val deletedRows = db.delete(TABLA_PERSONAJE, "$COLUMN_ID_USER = ?", arrayOf(personajeId))
+            db.setTransactionSuccessful()
+            return deletedRows
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return -1
+        } finally {
+            db.endTransaction()
+        }
+    }
+
     fun modificarPersonaje(personajeP: PersonajeP, id: String): Int {
         val db = this.writableDatabase
         val nombre = personajeP.getNombre()
