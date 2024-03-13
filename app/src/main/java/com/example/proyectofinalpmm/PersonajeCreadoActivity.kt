@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class PersonajeCreadoActivity : BaseActivity() {
     private lateinit var binding: ActivityPersonajeCreadoBinding
-
     private lateinit var razaPersonaje : TextView
     private lateinit var clasePersonaje : TextView
     private lateinit var estadoVitalPersonaje : TextView
@@ -38,7 +37,6 @@ class PersonajeCreadoActivity : BaseActivity() {
             nombrePersonaje.text = personaje.getNombre()
         }
 
-
         val globalButton = findViewById<ImageView>(R.id.ajustesBoton)
         globalButton.setOnClickListener {
             val intentb = Intent(this,AjustesActivity::class.java)
@@ -55,6 +53,5 @@ class PersonajeCreadoActivity : BaseActivity() {
             intent.putExtra("modificar", true)
             startActivity(intent)
         }
-
     }
 }

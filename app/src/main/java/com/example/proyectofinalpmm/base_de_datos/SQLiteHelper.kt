@@ -524,6 +524,7 @@ class SQLiteHelper(context: Context) :
                 "Elfo" -> PersonajeP.Raza.Elfo
                 "Enano" -> PersonajeP.Raza.Enano
                 "Maldito" -> PersonajeP.Raza.Maldito
+     //           "Orco" ->PersonajeP.Raza.
                 else -> PersonajeP.Raza.Humano
             }
 

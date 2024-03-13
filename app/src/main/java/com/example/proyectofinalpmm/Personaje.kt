@@ -15,8 +15,8 @@ class Personaje(
     private var defensa: Int = 0
 
     // Enumeración para el tipo de raza y clase
-    enum class Raza { Humano, Elfo, Enano, Maldito }
-    enum class Clase { Brujo, Mago, Guerrero }
+    enum class Raza { Humano, Elfo, Enano, Maldito, Orco }
+    enum class Clase {Mago, Guerrero }
     enum class EstadoVital{Anciano, Joven, Adulto}
 
     // Inicialización de los atributos tras la construcción del objeto Personaje
@@ -136,10 +136,10 @@ class Personaje(
                 calcularSalud() // Subir la salud al límite del nivel
                 println("$nombre utiliza su habilidad de Mago para restaurar su salud.")
             }
-            Clase.Brujo -> {
-                ataque *= 2 // Duplicar el ataque
-                println("$nombre utiliza su habilidad de Brujo para duplicar su ataque.")
-            }
+    //        Clase.Brujo -> {
+      //          ataque *= 2 // Duplicar el ataque
+        //        println("$nombre utiliza su habilidad de Brujo para duplicar su ataque.")
+          //  }
             Clase.Guerrero -> {
                 suerte *= 2 // Duplicar la suerte
                 println("$nombre utiliza su habilidad de Guerrero para duplicar su suerte.")
