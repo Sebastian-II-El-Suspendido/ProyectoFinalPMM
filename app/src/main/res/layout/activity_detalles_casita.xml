@@ -2,9 +2,94 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/layoutPrincipal"
     android:layout_width="match_parent"
+    android:background="@drawable/barrio1"
     android:layout_height="match_parent"
     tools:context=".DetallesCasita">
+
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/bordemarcos"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textViewCasa"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:fontFamily="@font/silk_bold"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Distrito de las Mil Fuentes"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/imageViewCasa"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:src="@drawable/casa1" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="600dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="228dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bordemarcos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/silk_bold"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="Entras a la ciudad (Espero que con los bolsillos bien cargados de oro) con la necesidad de adquirir una nueva propiedad donde poder descansar de tus aventuras. Se te presentan distintas propiedas que puedes comprar"
+                android:textColor="#404040"
+                android:textSize="16sp"
+                android:visibility="visible" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnVolverCiudad"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#6B8096"
+        android:fontFamily="@font/silk_bold"
+        android:gravity="center"
+        android:text="Atrás"
+        android:textColor="#404040"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

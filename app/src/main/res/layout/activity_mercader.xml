@@ -170,7 +170,7 @@
 
             <TextView
                 android:id="@+id/textNombre"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/bordemarcos"
@@ -182,7 +182,7 @@
 
             <TextView
                 android:id="@+id/textTipo"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/bordemarcos"
@@ -194,7 +194,7 @@
 
             <TextView
                 android:id="@+id/textPeso"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/bordemarcos"
@@ -302,7 +302,7 @@
 
             <TextView
                 android:id="@+id/textNombreV"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/bordemarcos"
@@ -314,7 +314,7 @@
 
             <TextView
                 android:id="@+id/textTipoV"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/bordemarcos"
@@ -326,7 +326,7 @@
 
             <TextView
                 android:id="@+id/textPesoV"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/bordemarcos"
